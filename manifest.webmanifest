@@ -1,0 +1,14 @@
+{
+  "name": "Sastra Solution Group",
+  "short_name": "Sastra",
+  "description": "Technology with a Khmer heart — 12 digital products from Sastra Solution Group.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#131211",
+  "theme_color": "#131211",
+  "icons": [
+    { "src": "assets/favicon.png", "sizes": "64x64", "type": "image/png" },
+    { "src": "assets/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "assets/sastra-lockup.png", "sizes": "480x480", "type": "image/png" }
+  ]
+}
