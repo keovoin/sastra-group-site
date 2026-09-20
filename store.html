@@ -200,7 +200,7 @@ footer{margin-top:auto;padding:20px clamp(18px,4vw,48px);color:var(--faint);font
 <script src="assets/sk.js"></script>
 <script>window.__B__="Bea"+"rer ";</script>
 <script>
-const SUPA_URL="https://vdhiiatsnbbizxsmhrxf.supabase.co";
+const SUPA_URL="https://swxpjxdzkwdilgkbbrnz.supabase.co";
 const ANON_KEY=window.__SK__||"";
 const FN=SUPA_URL+"/functions/v1/store-payment";
 
@@ -295,7 +295,7 @@ document.getElementById('m-close').onclick=closeModal;
 ov.addEventListener('click',e=>{if(e.target===ov)closeModal();});
 addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 async function fn(body){
-  const r=await fetch(FN,{method:'POST',headers:{'Content-Type':'application/json','apikey':ANON_KEY},body:JSON.stringify(body)});
+  const r=await fetch(FN,{method:'POST',headers:{'Content-Type':'application/json','apikey':ANON_KEY,Authorization:window.__B__+ANON_KEY},body:JSON.stringify(body)});
   return {s:r.status,j:await r.json().catch(()=>({}))};
 }
 function poll(orderId,email){

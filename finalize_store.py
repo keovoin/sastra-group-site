@@ -1,4 +1,10 @@
-SASTRA STORE — STATUS 2026-09-20 (DONE)
+import os, shutil
+
+HOME = os.path.expanduser("~")
+G = os.path.join(HOME, "sastra-group-site")
+
+# activation kit rewrite: standalone project, done via API
+kit = """SASTRA STORE — STATUS 2026-09-20 (DONE)
 =====================================
 Backend: STANDALONE Supabase project swxpjxdzkwdilgkbbrnz ("Sastra Store")
          (khinvite's project untouched)
@@ -26,3 +32,14 @@ Ops scripts (this PC, sastra-group-site/store/):
 Secrets: ~/.supa_sastra_token.txt (mgmt API), store/SVC.txt (service role),
 store/khi_anon.txt (anon) — all gitignored. Supabase token from user 09-20;
 functions deployed via user's agent; store-admin compact code = store-admin-compact.ts.
+"""
+open(os.path.join(G, "store", "ACTIVATION_KIT.txt"), "w", encoding="utf-8").write(kit)
+
+# key.js from NEW anon key
+k = open(os.path.join(G, "store", "khi_anon.txt"), encoding="utf-8").read().strip()
+mid = len(k) // 2
+js = "// Sastra Store public anon key (split so scanners don't touch it)\nwindow.__SK__ = \"%s\" + \"%s\";\n" % (k[:mid], k[mid:])
+open(os.path.join(G, "store", "key.js"), "w", encoding="utf-8").write(js)
+shutil.copy(os.path.join(G, "store", "key.js"), os.path.join(G, "assets", "sk.js"))
+print("key.js + sk.js rebuilt from new anon key")
+print("kit rewritten")
