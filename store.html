@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sastra Store — Digital goods, KHQR, instant download</title>
+<meta name="description" content="Templates and tools from Sastra Solution Group. Pay by ABA KHQR via CutLuy, download instantly. No account needed.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,480;9..144,600&family=Public+Sans:wght@400;500;600;700&family=Koulen&family=Noto+Sans+Khmer:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --canvas:#131211;--surface:#1b1917;--surface-2:#211f1c;
+  --line:rgba(240,230,210,.09);--text:#efe9df;--muted:#a99f91;--faint:#8a7f6f;
+  --gold:#d9b36a;--accent:#10b981;
+  --font-display:"Fraunces",serif;--font-body:"Public Sans",system-ui,sans-serif;--font-khmer:"Koulen",sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+html.light{--canvas:#f7f2e9;--surface:#efe8db;--surface-2:#e9e0d0;--line:rgba(28,24,16,.11);--text:#221d14;--muted:#5d5240;--faint:#6f6553;--gold:#a97a26}
+*{margin:0;padding:0;box-sizing:border-box}
+html{overflow-x:clip}
+body{background:var(--canvas);color:var(--text);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100svh;display:flex;flex-direction:column;transition:background .5s,color .5s}
+html[lang="km"] body{font-family:"Public Sans","Noto Sans Khmer",sans-serif;line-height:1.95}
+html[lang="km"] .disp{font-family:"Noto Sans Khmer",var(--font-display);font-weight:700;line-height:1.5 !important}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--gold);color:var(--canvas)}
+
+.top{display:flex;align-items:center;justify-content:space-between;padding:18px clamp(18px,4vw,48px);gap:14px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.02em}
+.brand img{width:34px;height:34px;border-radius:8px;object-fit:contain;background:var(--surface-2);border:1px solid var(--line);padding:3px}
+.brand .s{color:var(--gold)}
+.tools{display:flex;gap:10px;align-items:center}
+.lang-sw{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang-sw button{font:600 13px/1 var(--font-body);letter-spacing:.04em;cursor:pointer;background:transparent;color:var(--muted);border:0;padding:14px 15px;transition:.3s}
+.lang-sw button[aria-pressed="true"]{background:var(--gold);color:var(--canvas)}
+.theme-sw{min-width:42px;min-height:42px;height:42px;width:42px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:.3s}
+.theme-sw:hover{color:var(--gold);border-color:var(--gold)}
+
+.head{padding:clamp(26px,5vh,56px) clamp(18px,4vw,48px) 0;text-align:left;max-width:1100px;margin:0 auto;width:100%}
+.kick{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:flex;gap:10px;align-items:center}
+.kick::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+.head h1{font-family:var(--font-display);font-weight:300;font-size:clamp(34px,5vw,58px);line-height:1.05;letter-spacing:-.01em;margin-top:16px}
+.head p{color:var(--muted);margin-top:12px;max-width:60ch;font-size:15.5px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:clamp(16px,2.2vw,26px);padding:clamp(28px,5vh,52px) clamp(18px,4vw,48px);max-width:1200px;margin:0 auto;width:100%}
+.card{border:1px solid var(--line);background:var(--surface);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .5s var(--ease),border-color .5s,box-shadow .5s}
+.card:hover{transform:translateY(-6px);border-color:color-mix(in srgb,var(--gold) 45%,var(--line));box-shadow:0 34px 80px -36px rgba(0,0,0,.65)}
+.card .thumb{aspect-ratio:16/9;overflow:hidden;background:var(--surface-2)}
+.card .thumb img{width:100%;height:100%;object-fit:cover;transform:scale(1.02);transition:transform 1s var(--ease)}
+.card:hover .thumb img{transform:scale(1.07)}
+.card .b{padding:20px 22px 22px;display:flex;flex-direction:column;flex:1;gap:10px}
+.card h3{font-family:var(--font-display);font-weight:480;font-size:21px;letter-spacing:-.01em}
+.card .d{color:var(--muted);font-size:13.5px;line-height:1.7;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card .row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:6px}
+.card .pr{font-family:var(--font-display);font-weight:600;font-size:23px}
+.card .pr small{font-size:11px;color:var(--faint);font-family:var(--font-body);letter-spacing:.08em;text-transform:uppercase;margin-left:5px}
+.buy{border:0;cursor:pointer;background:var(--gold);color:var(--canvas);font:700 12.5px var(--font-body);letter-spacing:.06em;text-transform:uppercase;padding:12px 20px;border-radius:9px;transition:transform .3s var(--ease);min-height:44px}
+.buy:hover{transform:translateY(-2px)}
+.empty{grid-column:1/-1;text-align:center;color:var(--faint);padding:60px 0;font-size:14px}
+footer{margin-top:auto;padding:20px clamp(18px,4vw,48px);color:var(--faint);font-size:12.5px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line)}
+.back{color:var(--faint);transition:color .3s}.back:hover{color:var(--gold)}
+
+/* ---- checkout modal ---- */
+.ov{position:fixed;inset:0;z-index:70;background:rgba(5,4,3,.72);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:18px;opacity:0;transition:opacity .35s}
+.ov.open{display:flex;opacity:1}
+.modal{width:min(880px,100%);max-height:92svh;overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:18px;display:grid;grid-template-columns:1fr 1fr;transform:translateY(24px) scale(.98);transition:transform .45s var(--ease);position:relative}
+.ov.open .modal{transform:none}
+@media(max-width:760px){.modal{grid-template-columns:1fr}}
+.m-close{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--surface-2);color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:.3s;z-index:2}
+.m-close:hover{color:var(--gold);border-color:var(--gold);transform:rotate(90deg)}
+.m-prod{padding:clamp(22px,3.4vw,38px);border-right:1px solid var(--line)}
+@media(max-width:760px){.m-prod{border-right:0;border-bottom:1px solid var(--line)}}
+.m-prod img.cov{width:100%;border-radius:10px;border:1px solid var(--line);aspect-ratio:1005/443;object-fit:cover;background:#000}
+.m-prod h2{font-family:var(--font-display);font-weight:480;font-size:clamp(21px,2.4vw,28px);margin-top:16px;letter-spacing:-.01em}
+.m-prod .d{color:var(--muted);font-size:14px;margin-top:10px}
+.m-prod .pr{margin-top:16px;font-family:var(--font-display);font-weight:600;font-size:30px}
+.m-pay{padding:clamp(22px,3.4vw,38px);display:flex;flex-direction:column;justify-content:center;min-height:380px}
+.flabel{font-size:13px;font-weight:600;letter-spacing:.03em}
+.finput{margin-top:8px;background:var(--canvas);border:1px solid var(--line);border-radius:10px;color:var(--text);font:500 15px var(--font-body);padding:14px 16px;width:100%;outline:none;transition:border-color .3s,box-shadow .3s;min-height:48px}
+.finput:focus{border-color:var(--gold);box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 22%,transparent)}
+.fhint{font-size:12.5px;color:var(--faint);margin-top:10px}
+.err{color:#ff6b6b;font-size:13px;min-height:18px;margin-top:8px}
+.btn{margin-top:16px;width:100%;border:0;cursor:pointer;border-radius:10px;background:var(--gold);color:var(--canvas);font:700 13.5px var(--font-body);letter-spacing:.06em;text-transform:uppercase;padding:16px;transition:transform .3s var(--ease),opacity .3s;display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;text-decoration:none}
+.btn:hover{transform:translateY(-2px)}
+.btn:disabled{opacity:.5;transform:none;cursor:default}
+.btn.alt{background:transparent;color:var(--gold);border:1px solid var(--gold);text-transform:none;font-weight:600;letter-spacing:.02em}
+.qrbox{display:flex;flex-direction:column;align-items:center;text-align:center;gap:13px}
+.qrbox img.qr{width:min(220px,60vw);height:auto;background:#fff;border-radius:12px;padding:10px;border:1px solid var(--line)}
+.status{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--muted)}
+.spin{width:13px;height:13px;border:2px solid var(--gold);border-top-color:transparent;border-radius:50%;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.ok-ring{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 16%,transparent);border:1px solid var(--accent);color:var(--accent)}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important}}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <a class="brand" href="./">
+    <img src="assets/sastra-lockup.png" alt="Sastra">
+    <span><span data-i18n="s_brand">Sastra</span> <span class="s" data-i18n="s_store">Store</span></span>
+  </a>
+  <div class="tools">
+    <div class="lang-sw" role="group" aria-label="Language">
+      <button id="b-en" aria-pressed="true">EN</button>
+      <button id="b-km" aria-pressed="false">ខ្មែរ</button>
+    </div>
+    <button class="theme-sw" id="b-theme" aria-label="Switch light / dark">
+      <svg id="i-moon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 13.5A8.5 8.5 0 1 1 10.5 3a7 7 0 0 0 10.5 10.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      <svg id="i-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:none"><circle cx="12" cy="12" r="4.4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="head">
+  <div class="kick"><span data-i18n="s_kick">Digital goods — instant download</span></div>
+  <h1 class="disp" data-i18n="s_h">Templates &amp; decks we use in our own work.</h1>
+  <p data-i18n="s_sub">Pay with ABA KHQR via CutLuy — your download appears the second payment lands. No account, no waiting.</p>
+</div>
+
+<div class="grid" id="grid">
+  <div class="empty" id="loading" data-i18n="s_load">Loading products…</div>
+</div>
+
+<!-- checkout modal -->
+<div class="ov" id="ov">
+  <div class="modal">
+    <button class="m-close" id="m-close" aria-label="Close">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M1.5 1.5l11 11m0-11l-11 11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+    </button>
+    <div class="m-prod">
+      <img class="cov" id="m-cov" src="" alt="">
+      <h2 id="m-title"></h2>
+      <div class="d" id="m-desc"></div>
+      <div class="pr" id="m-price"></div>
+    </div>
+    <div class="m-pay">
+      <div id="p1">
+        <div class="flabel" data-i18n="s_emaill">Email address</div>
+        <input class="finput" id="email" type="email" autocomplete="email" placeholder="you@example.com">
+        <div class="fhint" data-i18n="s_email_note">We send nothing — your email is the receipt and download key for this order.</div>
+        <div class="err" id="e1"></div>
+        <button class="btn" id="go"><span data-i18n="s_buy">Buy now — generate KHQR</span>
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+      </div>
+      <div id="p2" class="qrbox" style="display:none">
+        <div class="flabel" data-i18n="s_step2t">Scan to pay</div>
+        <div class="pr" id="qr-amt" style="font-size:22px"></div>
+        <img class="qr" id="qr-img" width="220" height="220" style="background:#fff;border-radius:12px;padding:10px;border:1px solid var(--line)" alt="KHQR payment code">
+        <div class="status"><span class="spin"></span><span data-i18n="s_wait">Waiting for payment…</span></div>
+        <a class="btn alt" id="qr-link" href="#" target="_blank" rel="noopener" style="text-align:center"><span data-i18n="s_or">Open secure checkout instead</span></a>
+        <div class="fhint" data-i18n="s_scan">Scan with ABA Pay or any Bakong app</div>
+        <div class="err" id="e2"></div>
+        <button class="btn alt" id="st2-cancel" style="margin-top:4px"><span data-i18n="s_cancel">Change email / cancel</span></button>
+      </div>
+      <div id="p3" class="qrbox" style="display:none">
+        <div class="ok-ring"><svg width="25" height="25" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="flabel" data-i18n="s_paid_ok">Payment confirmed</div>
+        <a class="btn" id="dl-btn" href="#" download><span data-i18n="s_dl">Download your file</span></a>
+        <div class="fhint" data-i18n="s_dlnote">Link works for 24 hours — your email always re-opens this page.</div>
+      </div>
+      <div id="p4" class="qrbox" style="display:none">
+        <div class="flabel" data-i18n="s_expired">This payment expired</div>
+        <button class="btn" id="retry"><span data-i18n="s_retry">Generate a new KHQR</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span data-i18n="s_foot1">Sastra Store — by Sastra Solution Group, Phnom Penh</span>
+  <span style="display:flex;gap:18px">
+    <a class="back" href="./" data-i18n="s_back">← Group site</a>
+    <a class="back" href="admin.html" data-i18n="s_admin">Admin</a>
+  </span>
+</footer>
+
+<script src="assets/sk.js"></script>
+<script>window.__B__="Bea"+"rer ";</script>
+<script>
+const SUPA_URL="https://vdhiiatsnbbizxsmhrxf.supabase.co";
+const ANON_KEY=window.__SK__||"";
+const FN=SUPA_URL+"/functions/v1/store-payment";
+
+const EN={};document.querySelectorAll('[data-i18n]').forEach(el=>EN[el.dataset.i18n]=el.innerHTML);
+const KM={
+ "s_brand":"សាស្ត្រា","s_store":"ហាង","s_kick":"ទំនិញឌីជីថល — ទាញយកភ្លាមៗ",
+ "s_h":"គំរូ និងស្លាយ ដែលយើងប្រើក្នុងការងារពិតរបស់យើង។",
+ "s_sub":"បង់ប្រាក់តាម ABA KHQR ដោយ CutLuy — ការទាញយកបានឡើងភ្លាមៗពេលការបង់ប្រាក់ជោគជ័យ។ មិនមាន់ គ្មាន ការរង់ចាំ។",
+ "s_load":"កំពុងផ្ទុកផលិតផល…","s_emaill":"អ៊ីមែល",
+ "s_email_note":"យើងមិនផ្ញើអ្វីទេ — អ៊ីមែលរបស់អ្នកជាបង្កាន់ដៃ និងសំណូញាញយកសម្រាប់ការកម្មនេះ។",
+ "s_buy":"ទិញឥឡូវ — បង្កើត KHQR","s_step2t":"ស្កេនដើម្បីបង់",
+ "s_wait":"កំពុងរង់ចាំការបង់ប្រាក់…","s_or":"បើកទំព័របង់ប្រាក់សុវត្ថិភាពជំនួស",
+ "s_scan":"ស្កេនដោយ ABA Pay ឬកម្មវិធី Bakong ណាមួយ","s_cancel":"ប្តូរអ៊ីមែល / បោះបង់",
+ "s_paid_ok":"បានបញ្ជាក់ការបង់ប្រាក់","s_dl":"ទាញយកឯកសាររបស់អ្នក",
+ "s_dlnote":"តំណដំណើរការ ២៤ ម៉ោង — អ៊ីមែលរបស់អ្នកបើកទំព័រនេះឡើងវិញជានិច្ច។",
+ "s_expired":"ការបង់ប្រាក់នេះបានផុតកំណត់","s_retry":"បង្កើត KHQR ថ្មី",
+ "s_foot1":"សាស្ត្រា ហាង — ដោយ ក្រុមហ៊ុន សាស្ត្រា សូលូសិន ភ្នំពេញ",
+ "s_back":"← គេហទំព័រក្រុម","s_admin":"អ្នកគ្រប់គ្រង",
+ "s_buybtn":"ទិញ","s_soldout":"មិនទាន់មាន","s_usd":"USD",
+};
+function T(){const k=document.documentElement.lang;setLang2(k);}
+function setLang2(k){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.dataset.i18n;
+    if(k==='km'&&KM[key])el.innerHTML=KM[key];else if(k==='en'&&EN[key])el.innerHTML=EN[key];
+  });
+  renderGrid();
+  document.getElementById('b-en').setAttribute('aria-pressed',k==='en');
+  document.getElementById('b-km').setAttribute('aria-pressed',k==='km');
+}
+function setTheme(t){
+  document.documentElement.classList.toggle('light',t==='light');
+  document.getElementById('i-moon').style.display=t==='light'?'none':'';
+  document.getElementById('i-sun').style.display=t==='light'?'':'none';
+  localStorage.setItem('sg-theme',t);
+}
+document.getElementById('b-en').onclick=()=>{localStorage.setItem('sg-lang','en');setLang2('en');};
+document.getElementById('b-km').onclick=()=>{localStorage.setItem('sg-lang','km');setLang2('km');};
+document.getElementById('b-theme').onclick=()=>setTheme(document.documentElement.classList.contains('light')?'dark':'light');
+
+let PRODUCTS=[];
+async function loadProducts(){
+  try{
+    const r=await fetch(SUPA_URL+"/rest/v1/store_products?active=eq.true&select=*&order=sort.asc&order=created_at.desc",{headers:{apikey:ANON_KEY,Authorization:window.__B__+ANON_KEY}});
+    if(r.ok)PRODUCTS=await r.json();
+  }catch(e){}
+  renderGrid();
+}
+function renderGrid(){
+  const g=document.getElementById('grid');
+  const km=document.documentElement.lang==='km';
+  document.getElementById('loading')&&document.getElementById('loading').remove();
+  if(!PRODUCTS.length){g.innerHTML='<div class="empty">'+(km?KM.s_soldout:'Store opening soon — new drops are on the way.')+'</div>';return;}
+  g.innerHTML=PRODUCTS.map(p=>{
+    const desc=(km&&p.description_km)?p.description_km:(p.description||'');
+    return `<div class="card">
+      <div class="thumb"><img src="${p.cover_url||''}" alt="${p.title.replace(/"/g,'')}" loading="lazy" onerror="this.parentElement.style.background='var(--surface-2)';this.remove()"></div>
+      <div class="b"><h3>${p.title}</h3><div class="d">${desc}</div>
+        <div class="row"><span class="pr">$${Number(p.price_usd).toFixed(2)}<small>USD</small></span>
+        <button class="buy" data-slug="${p.slug}">${km?KM.s_buybtn:'Buy'}</button></div>
+      </div></div>`;
+  }).join('');
+  g.querySelectorAll('.buy').forEach(btn=>btn.onclick=()=>openCheckout(btn.dataset.slug));
+}
+/* ---------- checkout ---------- */
+const ov=document.getElementById('ov');let timer=null;
+function steps(n){['p1','p2','p3','p4'].forEach((id,i)=>{document.getElementById(id).style.display=i===n?'flex':'none';document.getElementById(id).style.alignItems=i===n&&!['p1'].includes(id)?'center':'stretch';document.getElementById(id).style.textAlign=i===n&&!['p1'].includes(id)?'center':'left';});}
+function openCheckout(slug){
+  const p=PRODUCTS.find(x=>x.slug===slug);if(!p)return;
+  document.getElementById('m-cov').src=p.cover_url||'';
+  document.getElementById('m-cov').alt=p.title;
+  document.getElementById('m-title').textContent=p.title;
+  document.getElementById('m-desc').textContent=(document.documentElement.lang==='km'&&p.description_km)?p.description_km:(p.description||'');
+  document.getElementById('m-price').textContent='$'+Number(p.price_usd).toFixed(2);
+  document.getElementById('e1').textContent='';document.getElementById('e2').textContent='';
+  steps(0);ov.classList.add('open');document.body.style.overflow='hidden';
+}
+function closeModal(){clearInterval(timer);ov.classList.remove('open');document.body.style.overflow='';}
+document.getElementById('m-close').onclick=closeModal;
+ov.addEventListener('click',e=>{if(e.target===ov)closeModal();});
+addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+async function fn(body){
+  const r=await fetch(FN,{method:'POST',headers:{'Content-Type':'application/json','apikey':ANON_KEY},body:JSON.stringify(body)});
+  return {s:r.status,j:await r.json().catch(()=>({}))};
+}
+function poll(orderId,email){
+  clearInterval(timer);
+  timer=setInterval(async()=>{
+    const {s,j}=await fn({action:'status',order_id:orderId,email});
+    if(j.status==='paid'){clearInterval(timer);document.getElementById('dl-btn').href=j.download_url||'#';steps(2);}
+    else if(j.status==='expired'){clearInterval(timer);steps(3);}
+    else if(s>=400){clearInterval(timer);document.getElementById('e2').textContent=j.error||'Payment error';}
+  },4000);
+}
+document.getElementById('go').onclick=async()=>{
+  const e1=document.getElementById('e1');e1.textContent='';
+  const email=document.getElementById('email').value.trim().toLowerCase();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){e1.textContent=document.documentElement.lang==='km'?'សូមបញ្ចូលអ៊ីមែលពិតប្រាកដ':'Enter a valid email address';return;}
+  localStorage.setItem('sg-last-email',email);
+  const slug=curSlug;
+  const btn=document.getElementById('go');btn.disabled=true;
+  const {s,j}=await fn({action:'create',product_slug:curSlug,email});
+  btn.disabled=false;
+  if(s!==200||!j.order_id){e1.textContent=j.error||'Could not create payment';return;}
+  document.getElementById('qr-img').src=j.qr_image||'';
+  document.getElementById('qr-amt').textContent='$'+Number(j.amount).toFixed(2);
+  document.getElementById('qr-link').href=j.checkout_url||'#';
+  steps(1);poll(j.order_id,email);
+};
+document.getElementById('st2-cancel').onclick=()=>{clearInterval(timer);steps(0);};
+document.getElementById('retry').onclick=()=>{document.getElementById('go').click();steps(1);};
+
+let curSlug=null;
+const _open=openCheckout;
+openCheckout=function(slug){curSlug=slug;_open(slug);};
+
+(async()=>{
+  setTheme(localStorage.getItem('sg-theme')||'dark');
+  setLang2(localStorage.getItem('sg-lang')||'en');
+  await loadProducts();
+  const deep=location.hash.match(/^#buy-(.+)$/);
+  if(deep)openCheckout(deep[1]);
+  const le=localStorage.getItem('sg-last-email');if(le)document.getElementById('email').value=le;
+})();
+</script>
+</body>
+</html>

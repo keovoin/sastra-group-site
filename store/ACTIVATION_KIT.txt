@@ -1,0 +1,38 @@
+SASTRA STORE — BACKEND ACTIVATION KIT (v2, with CMS)
+=====================================================
+Frontends ALREADY LIVE:
+  storefront  https://sastra-group.vercel.app/store.html   (auto catalog grid + KHQR modal)
+  admin CMS   https://sastra-group.vercel.app/admin.html   (passcode: set in step 2)
+
+Everything money-related reuses khinvite's Supabase + CutLuy key.
+3 paste-steps in Lovable ("Everlasting Invites" > Cloud), ~6 minutes:
+
+STEP 1 — tables
+  SQL editor ← paste whole file:
+  C:\Users\KEOVOIN-DESKTOP\sastra-group-site\store\sql_store_schema.sql
+  Run → Run anyway.
+
+STEP 2 — admin + Khmer column
+  (optional: edit 'sastra-admin-2026' in the file FIRST to pick your own passcode)
+  SQL editor ← paste whole file:
+  C:\Users\KEOVOIN-DESKTOP\sastra-group-site\store\sql_store_admin.sql
+  Run → Run anyway.
+
+STEP 3 — edge functions (Cloud > Edge Functions > New), two of them:
+  a) name: store-payment   ← paste: store\store-payment-index.ts
+  b) name: store-admin     ← paste: store\store-admin-index.ts
+  Deploy both.
+
+STEP 4 — publish your first product (all in the browser, no SQL)
+  Open https://sastra-group.vercel.app/admin.html
+  → unlock with your passcode → Edit "PPT_Budget Proposal"
+  → upload C:\Users\KEOVOIN-DESKTOP\Downloads\KEOVOIN_Budget_Planner.pptx
+  → upload any cover image (or keep the current cover URL)
+  → Save. Product is live on the storefront.
+
+FROM NOW ON: add every other deck/template you sell via admin.html
+(NEW PRODUCT → fill titles EN/ខ្មែរ, price, upload file + cover → Save).
+Orders + revenue counters show on the same dashboard page.
+
+How to add MORE Gumroad items: just re-create them in the CMS with your own
+file + price — sales go through CutLuy to your account (no Gumroad fee).

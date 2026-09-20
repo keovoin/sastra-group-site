@@ -1,0 +1,4 @@
+shots
+*.py
+shots_sastra_group.py
+.env.local

@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sastra Solution Group — Products for Cambodia</title>
+<meta name="description" content="Sastra Solution Group builds digital products for Cambodia and the world: khinvite, TVERCV, UrDrama, KHFinder, Sastra Biz, KHChess and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,480;9..144,600&family=Public+Sans:wght@400;500;600&family=Koulen&family=Noto+Sans+Khmer:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d0c0a;
+  --canvas:#131211;
+  --surface:#1b1917;
+  --surface-2:#211f1c;
+  --line:rgba(240,230,210,.09);
+  --text:#efe9df;
+  --muted:#a99f91;
+  --faint:#6f665a;
+  --gold:#d9b36a;
+  --grain:.05;
+  --shadow-win:0 50px 120px -40px rgba(0,0,0,.75);
+  --font-display:"Fraunces",serif;
+  --font-body:"Public Sans",system-ui,sans-serif;
+  --font-khmer:"Koulen",sans-serif;
+  --font-khmer-body:"Noto Sans Khmer",sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+html.light{
+  --canvas:#f7f2e9;
+  --surface:#efe8db;
+  --surface-2:#e9e0d0;
+  --line:rgba(28,24,16,.11);
+  --text:#221d14;
+  --muted:#5d5240;
+  --faint:#8d7f68;
+  --gold:#a97a26;
+  --grain:.03;
+  --shadow-win:0 40px 90px -40px rgba(90,70,30,.35);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{
+  background:var(--canvas);color:var(--text);
+  font-family:var(--font-body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  transition:background .5s var(--ease),color .5s var(--ease);
+}
+html[lang="km"] body{font-family:"Public Sans","Noto Sans Khmer",sans-serif;line-height:1.9}
+html[lang="km"] .font-display,html[lang="km"] .hero h1,html[lang="km"] h2.big,
+html[lang="km"] .about-lead,html[lang="km"] .ticker-track span{font-family:var(--font-khmer),var(--font-display);letter-spacing:.01em;font-weight:400}
+::selection{background:var(--gold);color:var(--canvas)}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+body::after{
+  content:"";position:fixed;inset:-50%;pointer-events:none;z-index:60;opacity:var(--grain);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  animation:grain 7s steps(10) infinite;
+}
+@keyframes grain{
+  0%,100%{transform:translate(0,0)}10%{transform:translate(-5%,-8%)}20%{transform:translate(-12%,4%)}
+  30%{transform:translate(6%,-14%)}40%{transform:translate(-4%,10%)}50%{transform:translate(12%,6%)}
+  60%{transform:translate(-14%,-4%)}70%{transform:translate(8%,12%)}80%{transform:translate(-8%,8%)}90%{transform:translate(4%,-6%)}
+}
+
+/* ------- nav ------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:18px clamp(20px,5vw,64px);
+  transition:background .5s var(--ease), border-color .5s, padding .5s var(--ease);
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{background:color-mix(in srgb,var(--canvas) 84%,transparent);backdrop-filter:blur(14px);border-color:var(--line);padding-top:12px;padding-bottom:12px}
+.nav-mark{display:flex;align-items:baseline;gap:10px;font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:.01em;white-space:nowrap}
+.nav-mark .kh{font-family:var(--font-khmer);font-size:15px;color:var(--gold);letter-spacing:.06em}
+.nav-links{display:flex;gap:clamp(12px,2vw,26px);font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.nav-links a{position:relative;transition:color .3s}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;height:1px;width:0;background:var(--gold);transition:width .35s var(--ease)}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+.nav-tools{display:flex;align-items:center;gap:10px;margin-left:auto}
+.lang-sw{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang-sw button{font:600 13px/1 var(--font-body);letter-spacing:.04em;cursor:pointer;background:transparent;color:var(--muted);border:0;padding:11px 14px;transition:background .3s,color .3s}
+.lang-sw button[aria-pressed="true"]{background:var(--gold);color:var(--canvas)}
+.theme-sw{
+  width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:transparent;
+  color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:color .3s,border-color .3s,transform .4s var(--ease);
+}
+.theme-sw:hover{color:var(--gold);border-color:var(--gold);transform:rotate(20deg)}
+@media(max-width:900px){.nav-links{display:none}}
+
+/* ------- hero ------- */
+.hero{
+  position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 clamp(20px,5vw,64px) clamp(48px,9vh,110px);
+  overflow:hidden;
+}
+.hero-ghost{
+  position:absolute;right:-3vw;top:4vh;font-family:var(--font-khmer);
+  font-size:clamp(130px,26vw,420px);line-height:1;color:transparent;
+  -webkit-text-stroke:1px color-mix(in srgb,var(--gold) 24%,transparent);
+  user-select:none;pointer-events:none;clip-path:inset(0);
+  animation:ghostdrift 16s ease-in-out infinite alternate;
+}
+@keyframes ghostdrift{from{transform:translateY(0)}to{transform:translateY(34px)}}
+.hero-kicker{
+  display:flex;align-items:center;gap:14px;margin-bottom:26px;
+  font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
+  opacity:0;transform:translateY(18px);animation:rise .9s var(--ease) .25s forwards;
+}
+.hero-kicker::before{content:"";width:44px;height:1px;background:var(--gold)}
+.hero h1{
+  font-family:var(--font-display);font-weight:300;
+  font-size:clamp(44px,8.2vw,120px);line-height:1.02;letter-spacing:-.015em;
+  max-width:13ch;
+}
+html[lang="km"] .hero h1{font-size:clamp(38px,6.8vw,100px);line-height:1.35;max-width:16ch}
+.hero h1 .line{display:block;overflow:hidden}
+.hero h1 .line i{display:block;font-style:normal;transform:translateY(105%);animation:line-up 1s var(--ease) forwards}
+.hero h1 .line:nth-child(2) i{animation-delay:.14s}
+.hero h1 .line:nth-child(3) i{animation-delay:.28s}
+@keyframes line-up{to{transform:translateY(0)}}
+@keyframes rise{to{opacity:1;transform:translateY(0)}}
+.hero-sub{
+  margin-top:28px;max-width:540px;color:var(--muted);font-size:clamp(15px,1.4vw,18px);
+  opacity:0;transform:translateY(18px);animation:rise .9s var(--ease) .6s forwards;
+}
+.hero-meta{
+  margin-top:clamp(36px,6vh,64px);display:flex;gap:clamp(24px,5vw,64px);flex-wrap:wrap;
+  opacity:0;transform:translateY(18px);animation:rise .9s var(--ease) .75s forwards;
+}
+.hero-meta .cell .n{font-family:var(--font-display);font-size:clamp(26px,3vw,40px);font-weight:480;line-height:1}
+.hero-meta .cell .l{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:6px}
+.scroll-cue{
+  position:absolute;left:clamp(20px,5vw,64px);bottom:clamp(48px,9vh,110px);
+  width:1px;height:56px;background:var(--line);overflow:hidden;
+  opacity:0;animation:rise .8s var(--ease) 1.1s forwards;
+}
+.scroll-cue::after{content:"";position:absolute;top:-56px;left:0;width:1px;height:56px;background:var(--gold);animation:cue 2.2s var(--ease) infinite}
+@keyframes cue{to{top:112px}}
+
+/* ------- ticker ------- */
+.ticker{border-block:1px solid var(--line);background:var(--surface);overflow:hidden;padding:15px 0}
+.ticker-track{display:flex;gap:0;white-space:nowrap;width:max-content;animation:tick 38s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker-track span{
+  font-family:var(--font-display);font-weight:480;font-size:14px;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--muted);padding:0 28px;display:inline-flex;align-items:center;gap:28px;
+}
+.ticker-track em{font-style:normal;color:var(--dot,#d9b36a)}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ------- sections shared ------- */
+.section{padding:clamp(80px,12vh,150px) clamp(20px,5vw,64px)}
+.eyebrow{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--prod,var(--gold));margin-bottom:22px}
+.eyebrow .idx{font-family:var(--font-display);color:var(--faint);letter-spacing:0}
+.eyebrow::after{content:"";flex:0 0 60px;height:1px;background:linear-gradient(90deg,var(--prod,var(--gold)),transparent)}
+h2.big{
+  font-family:var(--font-display);font-weight:300;letter-spacing:-.01em;
+  font-size:clamp(32px,5.4vw,68px);line-height:1.06;max-width:15ch;
+}
+html[lang="km"] h2.big{line-height:1.4}
+.prose{color:var(--muted);max-width:56ch;margin-top:22px;font-size:clamp(15px,1.3vw,17px)}
+.prose strong{color:var(--text);font-weight:600}
+
+.tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.tag{
+  font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  border:1px solid var(--line);border-radius:999px;padding:10px 15px;min-height:40px;display:inline-flex;align-items:center;
+  transition:border-color .3s,color .3s,transform .3s var(--ease);
+}
+.tag:hover{border-color:var(--prod,var(--gold));color:var(--text);transform:translateY(-2px)}
+
+.cta{
+  display:inline-flex;align-items:center;gap:12px;margin-top:34px;
+  font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--canvas);background:var(--prod,var(--gold));
+  padding:15px 26px;border-radius:2px;position:relative;overflow:hidden;
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 14px 40px -12px var(--prod,var(--gold))}
+.cta svg{transition:transform .35s var(--ease)}
+.cta:hover svg{transform:translateX(5px)}
+
+.split{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(36px,6vw,90px);align-items:center}
+.split.flip .copy{order:2}
+.split.flip .shot{order:1}
+@media(max-width:900px){.split{grid-template-columns:1fr}.split.flip .copy{order:1}.split.flip .shot{order:2}}
+
+.shot{position:relative}
+.shot-window{
+  position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  background:var(--surface);
+  box-shadow:var(--shadow-win);
+  transition:transform .6s var(--ease);
+}
+.shot:hover .shot-window{transform:perspective(1200px) rotateX(1.6deg) rotateY(-1.4deg) translateY(-6px)}
+.shot-window img{width:100%;height:auto;transform:scale(1.04);transition:transform 6s ease-out;will-change:transform}
+.shot-window:hover img{transform:scale(1.09)}
+.shot-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line);background:rgba(0,0,0,.25)}
+.shot-bar i{width:9px;height:9px;border-radius:50%;background:var(--faint);opacity:.55}
+.shot-bar .addr{margin-left:10px;font-size:11px;letter-spacing:.08em;color:var(--faint);border:1px solid var(--line);border-radius:5px;padding:3px 10px}
+.shot::before{
+  content:"";position:absolute;inset:-14%;z-index:-1;
+  background:radial-gradient(40% 45% at 60% 40%, color-mix(in srgb, var(--prod) 30%, transparent), transparent 70%);
+  filter:blur(30px);
+}
+.logo-badge{
+  position:absolute;left:-18px;bottom:-18px;width:84px;height:84px;border-radius:16px;
+  background:var(--surface-2);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 24px 60px -18px rgba(0,0,0,.8);
+  transition:transform .5s var(--ease);
+}
+.shot:hover .logo-badge{transform:translateY(-6px) rotate(-3deg)}
+.logo-badge img{width:64px;height:64px;object-fit:contain;border-radius:8px}
+@media(max-width:600px){.logo-badge{width:64px;height:64px;left:auto;right:8px;bottom:-20px}.logo-badge img{width:48px;height:48px}}
+
+.rv{opacity:0;transform:translateY(46px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv-d1{transition-delay:.12s}.rv-d2{transition-delay:.24s}
+
+.rule{height:1px;background:linear-gradient(90deg,transparent,var(--line) 18%,var(--line) 82%,transparent);margin:0 clamp(20px,5vw,64px)}
+
+/* ------- more-products strip ------- */
+.more-list{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.2vw,28px)}
+@media(max-width:1000px){.more-list{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.more-list{grid-template-columns:1fr}}
+.more-card{
+  position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  background:var(--surface);transition:transform .5s var(--ease),border-color .5s,box-shadow .5s var(--ease);
+}
+.more-card:hover{transform:translateY(-8px);border-color:color-mix(in srgb,var(--more-c) 55%,var(--line));box-shadow:0 30px 70px -30px rgba(0,0,0,.6)}
+.more-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--surface-2)}
+.more-thumb img{width:100%;height:100%;object-fit:cover;object-position:top center;transform:scale(1.02);transition:transform 1.2s var(--ease),filter .6s;filter:saturate(.9)}
+.more-card:hover .more-thumb img{transform:scale(1.09);filter:saturate(1.05)}
+.more-soon{
+  position:absolute;inset:0;display:grid;place-items:center;
+  background:linear-gradient(180deg,transparent 8%,color-mix(in srgb,var(--canvas) 72%,transparent));
+}
+.more-soon span{
+  font:700 10.5px/1 var(--font-body);letter-spacing:.22em;text-transform:uppercase;color:var(--canvas);
+  background:var(--more-c);padding:8px 14px;border-radius:999px;box-shadow:0 6px 24px -6px var(--more-c);
+}
+.more-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px}
+.more-row .name{display:flex;align-items:center;gap:10px;white-space:nowrap}
+.more-body .name{font-family:var(--font-display);font-weight:480;font-size:clamp(18px,1.6vw,21px);color:var(--text);letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.more-body .name::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--more-c);box-shadow:0 0 12px var(--more-c);flex:none}
+.more-body .desc{color:var(--muted);font-size:13.5px;line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.more-foot{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.more-foot .num{font-family:var(--font-display);font-size:12px;color:var(--faint)}
+.more-foot .go{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted);transition:all .35s var(--ease)}
+.more-card:hover .more-foot .go{border-color:var(--more-c);color:var(--more-c);transform:rotate(-45deg)}
+
+/* ------- about ------- */
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(36px,6vw,90px)}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr}}
+.about-lead{font-family:var(--font-display);font-weight:300;font-size:clamp(24px,3.2vw,38px);line-height:1.3;color:var(--text)}
+html[lang="km"] .about-lead{line-height:1.65}
+.about-lead em{font-style:italic;color:var(--gold)}
+html[lang="km"] .about-lead em{font-style:normal;color:var(--gold)}
+.principles{display:flex;flex-direction:column;margin-top:8px}
+.principle{padding:26px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:34px 1fr;gap:18px;align-items:start}
+.principle:first-child{border-top:1px solid var(--line)}
+.principle .dot{width:8px;height:8px;border-radius:50%;margin-top:8px;background:var(--pcol,var(--gold));box-shadow:0 0 0 4px color-mix(in srgb,var(--pcol,var(--gold)) 18%,transparent)}
+.principle h4{font-size:15px;letter-spacing:.04em;text-transform:uppercase;font-weight:600}
+.principle p{color:var(--muted);font-size:14.5px;margin-top:6px;max-width:44ch}
+
+/* ------- footer ------- */
+footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(48px,8vh,84px) clamp(20px,5vw,64px) 40px}
+.f-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;align-items:flex-start}
+.f-brand{font-family:var(--font-display);font-size:22px;font-weight:600}
+.f-brand .kh{display:block;font-family:var(--font-khmer);font-size:14px;color:var(--gold);margin-top:6px;letter-spacing:.06em}
+.f-cols{display:flex;gap:clamp(36px,6vw,80px);flex-wrap:wrap}
+.f-col h5{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:14px}
+.f-col a{display:block;padding:5px 0;color:var(--muted);font-size:14px;transition:color .3s,transform .3s var(--ease)}
+.f-col a:hover{color:var(--gold);transform:translateX(4px)}
+.f-bottom{margin-top:54px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--faint);font-size:12.5px;letter-spacing:.04em}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+  .rv{opacity:1;transform:none}
+  .hero h1 .line i{transform:none;animation:none}
+  .hero-kicker,.hero-sub,.hero-meta,.scroll-cue{opacity:1;transform:none;animation:none}
+  .ticker-track{animation:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a class="nav-mark" href="#top">Sastra Solution <span class="kh">សាស្ត្រា</span></a>
+  <div class="nav-links">
+    <a href="#khinvite">khinvite</a>
+    <a href="#tvercv">TVERCV</a>
+    <a href="#urdrama">UrDrama</a>
+    <a href="#khfinder">KHFinder</a>
+    <a href="#biz">Sastra Biz</a>
+    <a href="#store">Store</a>
+    <a href="#more" data-i18n="nav_more">More</a>
+  </div>
+  <div class="nav-tools">
+    <div class="lang-sw" role="group" aria-label="Language">
+      <button id="btn-en" aria-pressed="true">EN</button>
+      <button id="btn-km" aria-pressed="false">ខ្មែរ</button>
+    </div>
+    <button class="theme-sw" id="btn-theme" aria-label="Switch light / dark">
+      <svg id="ic-moon" width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M21 13.5A8.5 8.5 0 1 1 10.5 3a7 7 0 0 0 10.5 10.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      <svg id="ic-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" style="display:none"><circle cx="12" cy="12" r="4.4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-ghost" aria-hidden="true">សាស្ត្រា</div>
+  <div class="hero-kicker"><span data-i18n="kick">Sastra Solution Group — Cambodia</span></div>
+  <h1>
+    <span class="line"><i data-i18n="h1a">Technology with</i></span>
+    <span class="line"><i data-i18n="h1b">a Khmer</i></span>
+    <span class="line"><i data-i18n="h1c">heart.</i></span>
+  </h1>
+  <p class="hero-sub" data-i18n="hsub">We build and operate digital products — from Khmer event invitations to enterprise management — designed here, used everywhere.</p>
+  <div class="hero-meta">
+    <div class="cell"><div class="n" data-count="12">0</div><div class="l" data-i18n="m1">Products</div></div>
+    <div class="cell"><div class="n" data-count="2">0</div><div class="l" data-i18n="m2">Languages (EN / ខ្មែរ)</div></div>
+    <div class="cell"><div class="n" style="font-size:clamp(20px,2.4vw,32px)">KH ⇄ World</div><div class="l" data-i18n="m3">Built in Cambodia</div></div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true"></div>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="ticker"></div>
+</div>
+
+<!-- khinvite -->
+<section class="section prod" id="khinvite" style="--prod:#d9b36a">
+  <div class="split">
+    <div class="copy">
+      <div class="eyebrow rv"><span class="idx">01</span> <span data-i18n="p1_e">Celebrations, digitized</span></div>
+      <h2 class="big rv rv-d1">khinvite.com</h2>
+      <p class="prose rv rv-d2" data-i18n="p1_b">Elegant <strong data-i18n="p1_bs">digital invitations for every Khmer occasion</strong> — weddings, engagements, birthdays, shop openings, memorial services and more. Nine event types, each with its own art, animation and atmosphere. Guests RSVP, pay by ABA KHQR, and gift money lands on a live kiosk total at the venue.</p>
+      <div class="tags rv rv-d2">
+        <span class="tag" data-i18n="p1_t1">9 event types</span><span class="tag" data-i18n="p1_t2">KHQR payments</span>
+        <span class="tag" data-i18n="p1_t3">Live gift kiosk</span><span class="tag" data-i18n="p1_t4">EN + ខ្មែរ</span>
+      </div>
+      <a class="cta rv" href="https://www.khinvite.com" target="_blank" rel="noopener"><span data-i18n="visit">Visit</span> khinvite
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></a>
+    </div>
+    <div class="shot rv rv-d1">
+      <div class="shot-window">
+        <div class="shot-bar"><i></i><i></i><i></i><span class="addr">www.khinvite.com</span></div>
+        <img src="assets/khinvite.webp" alt="khinvite website" loading="lazy">
+      </div>
+      <div class="logo-badge"><img src="assets/khinvite-logo.png" alt="khinvite logo"></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- tvercv -->
+<section class="section prod" id="tvercv" style="--prod:#3b6fe0">
+  <div class="split flip">
+    <div class="copy">
+      <div class="eyebrow rv"><span class="idx">02</span> <span data-i18n="p2_e">Careers, decoded</span></div>
+      <h2 class="big rv rv-d1">tvercv.com</h2>
+      <p class="prose rv rv-d2" data-i18n="p2_b">Job seekers upload a CV and get an <strong>ATS analysis</strong> instantly — what recruiters see, what's missing, what to fix. AI rewrites, bilingual templates, and a live board of jobs and freelance gigs across Cambodia.</p>
+      <div class="tags rv rv-d2">
+        <span class="tag" data-i18n="p2_t1">ATS scoring</span><span class="tag" data-i18n="p2_t2">AI resume rewrite</span>
+        <span class="tag" data-i18n="p2_t3">Jobs &amp; gigs board</span><span class="tag" data-i18n="p2_t4">KHQR checkout</span>
+      </div>
+      <a class="cta rv" href="https://www.tvercv.com" target="_blank" rel="noopener"><span data-i18n="visit2">Visit</span> tvercv
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></a>
+    </div>
+    <div class="shot rv rv-d1">
+      <div class="shot-window">
+        <div class="shot-bar"><i></i><i></i><i></i><span class="addr">www.tvercv.com</span></div>
+        <img src="assets/tvercv.webp" alt="tvercv website" loading="lazy">
+      </div>
+      <div class="logo-badge"><img src="assets/tvercv-logo.png" alt="tvercv logo"></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- urdrama -->
+<section class="section prod" id="urdrama" style="--prod:#e0343c">
+  <div class="split">
+    <div class="copy">
+      <div class="eyebrow rv"><span class="idx">03</span> <span data-i18n="p3_e">Stories that binge</span></div>
+      <h2 class="big rv rv-d1">UrDrama</h2>
+      <p class="prose rv rv-d2" data-i18n="p3_b">A streaming home for <strong>short drama and reels</strong> — vertical episodes, auto-continuing playback, subscriptions with promo codes, and watch statistics. Built on Firebase + Cloud Run, delivered fast across the region.</p>
+      <div class="tags rv rv-d2">
+        <span class="tag" data-i18n="p3_t1">Short-form streaming</span><span class="tag" data-i18n="p3_t2">Subscriptions</span>
+        <span class="tag" data-i18n="p3_t3">Promo engine</span><span class="tag" data-i18n="p3_t4">Analytics</span>
+      </div>
+      <a class="cta rv" href="https://urdrama.com" target="_blank" rel="noopener"><span data-i18n="visit3">Visit</span> urdrama
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></a>
+    </div>
+    <div class="shot rv rv-d1">
+      <div class="shot-window">
+        <div class="shot-bar"><i></i><i></i><i></i><span class="addr">urdrama.com</span></div>
+        <img src="assets/urdrama.webp" alt="UrDrama website" loading="lazy">
+      </div>
+      <div class="logo-badge" style="font-family:var(--font-display);font-weight:600;color:#e0343c;font-size:26px">▶</div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- khfinder -->
+<section class="section prod" id="khfinder" style="--prod:#189a6c">
+  <div class="split flip">
+    <div class="copy">
+      <div class="eyebrow rv"><span class="idx">04</span> <span data-i18n="p4_e">Discover Cambodia</span></div>
+      <h2 class="big rv rv-d1">khfinder.com</h2>
+      <p class="prose rv rv-d2" data-i18n="p4_b">A living map of places worth going to — restaurants, cafés, temples, attractions, EV charging. Community listings with photos and reviews, <strong>province-by-province attraction guides</strong>, and near-me discovery on MapLibre.</p>
+      <div class="tags rv rv-d2">
+        <span class="tag" data-i18n="p4_t1">Interactive map</span><span class="tag" data-i18n="p4_t2">Community reviews</span>
+        <span class="tag" data-i18n="p4_t3">25 provinces</span><span class="tag" data-i18n="p4_t4">Offline-friendly PWA</span>
+      </div>
+      <a class="cta rv" href="https://khfinder.com" target="_blank" rel="noopener"><span data-i18n="visit4">Visit</span> khfinder
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></a>
+    </div>
+    <div class="shot rv rv-d1">
+      <div class="shot-window">
+        <div class="shot-bar"><i></i><i></i><i></i><span class="addr">khfinder.com</span></div>
+        <img src="assets/khfinder.webp" alt="KHFinder website" loading="lazy">
+      </div>
+      <div class="logo-badge"><img src="assets/khfinder-logo.png" alt="KHFinder logo"></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- biz -->
+<section class="section prod" id="biz" style="--prod:#6e49e8">
+  <div class="split">
+    <div class="copy">
+      <div class="eyebrow rv"><span class="idx">05</span> <span data-i18n="p5_e">Run the whole company</span></div>
+      <h2 class="big rv rv-d1">Sastra Biz</h2>
+      <p class="prose rv rv-d2" data-i18n="p5_b">Our enterprise platform for the team: <strong>time tracking, tasks, projects, invoices, HR, CRM and reports</strong> in one workspace — fully Khmer-localised, with an in-app AI assistant that acts on your own company data, always behind an approval click.</p>
+      <div class="tags rv rv-d2">
+        <span class="tag" data-i18n="p5_t1">ERP · CRM · HRM · ATS</span><span class="tag" data-i18n="p5_t2">AI assistant + tools</span>
+        <span class="tag" data-i18n="p5_t3">5,800+ Khmer UI strings</span><span class="tag" data-i18n="p5_t4">Self-hosted</span>
+      </div>
+      <a class="cta rv" href="https://sastra-biz.onrender.com" target="_blank" rel="noopener"><span data-i18n="open">Open</span> Sastra Biz
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></a>
+    </div>
+    <div class="shot rv rv-d1">
+      <div class="shot-window">
+        <div class="shot-bar"><i></i><i></i><i></i><span class="addr">sastra-biz.onrender.com</span></div>
+        <img src="assets/biztool.webp" alt="Sastra Biz platform" loading="lazy">
+      </div>
+      <div class="logo-badge"><img src="assets/sastra-lockup.png" alt="Sastra logo"></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- store -->
+<section class="section prod" id="store" style="--prod:#10b981">
+  <div class="split flip">
+    <div class="copy">
+      <div class="eyebrow rv"><span class="idx">06</span> <span data-i18n="p6_e">Digital goods, instant</span></div>
+      <h2 class="big rv rv-d1">Sastra Store</h2>
+      <p class="prose rv rv-d2" data-i18n="p6_b">Templates and decks we use in our own work — like the <strong>PPT Budget Proposal</strong>: quarterly and monthly budget tables, budget vs actual, Sankey financial charts. Pay with <strong>ABA KHQR</strong> through CutLuy, download lands instantly. No account, no waiting.</p>
+      <div class="tags rv rv-d2">
+        <span class="tag" data-i18n="p6_t1">Pay once, own forever</span><span class="tag" data-i18n="p6_t2">KHQR / ABA / Bakong</span>
+        <span class="tag" data-i18n="p6_t3">Instant delivery</span><span class="tag" data-i18n="p6_t4">New drops weekly</span>
+      </div>
+      <a class="cta rv" href="store.html"><span data-i18n="p6_cta">Open the store</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></a>
+    </div>
+    <div class="shot rv rv-d1">
+      <div class="shot-window">
+        <div class="shot-bar"><i></i><i></i><i></i><span class="addr">sastra-group.vercel.app/store</span></div>
+        <img src="assets/th-ppt-cover.webp" alt="PPT Budget Proposal deck" loading="lazy">
+      </div>
+      <div class="logo-badge" style="font-family:var(--font-display);font-weight:600;color:#10b981;font-size:30px">$</div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- more products -->
+<section class="section" id="more">
+  <div class="eyebrow rv" style="--prod:var(--gold)"><span class="idx">07</span> <span data-i18n="more_e">Also shipping from the group</span></div>
+  <h2 class="big rv rv-d1" data-i18n="more_h">And the rest of the family.</h2>
+  <div class="more-list rv rv-d2">
+    <a class="more-card" style="--more-c:#f2c14e" href="https://kh-chess-app.vercel.app" target="_blank" rel="noopener">
+      <div class="more-thumb"><img src="assets/th-chess.webp" alt="KHChess" loading="lazy"><span class="more-soon"><span data-i18n="soon">Coming soon</span></span></div>
+      <div class="more-body">
+        <span class="name">KHChess</span>
+        <span class="desc" data-i18n="r_chess">Play chess against a live engine or friends — leaderboards, instant matches, bilingual board UI.</span>
+        <div class="more-foot"><span class="num">08</span>
+          <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
+      </div>
+    </a>
+    <a class="more-card" style="--more-c:#14b8a6" href="https://sastra-card-design.vercel.app" target="_blank" rel="noopener">
+      <div class="more-thumb"><img src="assets/th-card.webp" alt="Sastra Card Design" loading="lazy"><span class="more-soon"><span data-i18n="soon">Coming soon</span></span></div>
+      <div class="more-body">
+        <span class="name">Sastra Card Design</span>
+        <span class="desc" data-i18n="r_card">Design Khmer greeting cards — birthdays, holidays, thank-you cards — in seconds, in the browser.</span>
+        <div class="more-foot"><span class="num">09</span>
+          <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
+      </div>
+    </a>
+    <a class="more-card" style="--more-c:#38bdf8" href="https://elitequiz.onrender.com" target="_blank" rel="noopener">
+      <div class="more-thumb"><img src="assets/th-quiz.webp" alt="Sastra Quiz" loading="lazy"><span class="more-soon"><span data-i18n="soon">Coming soon</span></span></div>
+      <div class="more-body">
+        <span class="name">Sastra Quiz</span>
+        <span class="desc" data-i18n="r_quiz">Mobile quiz competition with an admin panel for questions, categories and prize rounds.</span>
+        <div class="more-foot"><span class="num">10</span>
+          <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
+      </div>
+    </a>
+    <a class="more-card" style="--more-c:#60a5fa" href="https://godeye-60ce.onrender.com" target="_blank" rel="noopener">
+      <div class="more-thumb"><img src="assets/th-god.webp" alt="God's Eye View" loading="lazy"><span class="more-soon"><span data-i18n="soon">Coming soon</span></span></div>
+      <div class="more-body">
+        <span class="name">God's Eye View</span>
+        <span class="desc" data-i18n="r_god">A live 3D globe tracking planes, satellites and ships in real time.</span>
+        <div class="more-foot"><span class="num">11</span>
+          <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
+      </div>
+    </a>
+    <a class="more-card" style="--more-c:#65a30d" href="https://urplant-app.web.app" target="_blank" rel="noopener">
+      <div class="more-thumb"><img src="assets/th-plant.webp" alt="UrPlant" loading="lazy"><span class="more-soon"><span data-i18n="soon">Coming soon</span></span></div>
+      <div class="more-body">
+        <span class="name">UrPlant</span>
+        <span class="desc" data-i18n="r_plant">Plant-care companion app — watering reminders, plant library and growth journal on Android.</span>
+        <div class="more-foot"><span class="num">12</span>
+          <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
+      </div>
+    </a>
+    <a class="more-card" style="--more-c:#f97316" href="https://keovoin.github.io/Sastra-HowToLiveBetter/" target="_blank" rel="noopener">
+      <div class="more-thumb"><img src="assets/th-book.webp" alt="How To Live Better" loading="lazy"><span class="more-soon"><span data-i18n="soon">Coming soon</span></span></div>
+      <div class="more-body">
+        <span class="name">How To Live Better</span>
+        <span class="desc" data-i18n="r_book">An open knowledge book on trading money and time for health and freedom — 中文 / EN / ខ្មែរ.</span>
+        <div class="more-foot"><span class="num">13</span>
+          <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- about -->
+<section class="section" id="group">
+  <div class="eyebrow rv"><span class="idx">—</span> <span data-i18n="grp_e">The group</span></div>
+  <div class="about-grid">
+    <div>
+      <p class="about-lead rv" data-i18n="grp_lead">Twelve products and a store, one team. We start with a problem we can see from our own desk — an invitation sent by messenger, a CV lost in an inbox, a place with no pin on the map — and we <em>ship it, run it, and keep it fast.</em></p>
+    </div>
+    <div class="principles rv rv-d1">
+      <div class="principle" style="--pcol:#d9b36a">
+        <span class="dot"></span>
+        <div><h4 data-i18n="pr1_h">Khmer first</h4><p data-i18n="pr1_p">Full ខ្មែរ language support, KHQR payments, and designs that respect local ceremony and habit.</p></div>
+      </div>
+      <div class="principle" style="--pcol:#6e49e8">
+        <span class="dot"></span>
+        <div><h4 data-i18n="pr2_h">AI with a seatbelt</h4><p data-i18n="pr2_p">Assistants that act on real company data — but every mutating move waits for a human approve.</p></div>
+      </div>
+      <div class="principle" style="--pcol:#189a6c">
+        <span class="dot"></span>
+        <div><h4 data-i18n="pr3_h">Lean and live</h4><p data-i18n="pr3_p">Small team, modern stack, deployments measured in minutes. Every product here is running in production today.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-grid">
+    <div class="f-brand">Sastra Solution Group<span class="kh">ក្រុមហ៊ុន សាស្ត្រា សូលូសិន</span></div>
+    <div class="f-cols">
+      <div class="f-col">
+        <h5 data-i18n="f_prod">Products</h5>
+        <a href="https://www.khinvite.com" target="_blank" rel="noopener">khinvite</a>
+        <a href="https://www.tvercv.com" target="_blank" rel="noopener">tvercv</a>
+        <a href="https://urdrama.com" target="_blank" rel="noopener">UrDrama</a>
+        <a href="https://khfinder.com" target="_blank" rel="noopener">KHFinder</a>
+        <a href="https://sastra-biz.onrender.com" target="_blank" rel="noopener">Sastra Biz</a>
+        <a href="store.html">Sastra Store</a>
+      </div>
+      <div class="f-col">
+        <h5>&nbsp;</h5>
+        <a href="https://kh-chess-app.vercel.app" target="_blank" rel="noopener">KHChess</a>
+        <a href="https://sastra-card-design.vercel.app" target="_blank" rel="noopener">Card Design</a>
+        <a href="https://elitequiz.onrender.com" target="_blank" rel="noopener">Sastra Quiz</a>
+        <a href="https://godeye-60ce.onrender.com" target="_blank" rel="noopener">God's Eye View</a>
+        <a href="https://urplant-app.web.app" target="_blank" rel="noopener">UrPlant</a>
+      </div>
+      <div class="f-col">
+        <h5 data-i18n="f_comp">Company</h5>
+        <a href="#more" data-i18n="f_all">All products</a>
+        <a href="#group" data-i18n="f_about">About the group</a>
+        <a href="#top" data-i18n="f_top">Back to top</a>
+      </div>
+    </div>
+  </div>
+  <div class="f-bottom">
+    <span><span data-i18n="f_copy">© Sastra Solution Group. Phnom Penh, Cambodia.</span> <span id="yr"></span></span>
+    <span>khinvite · tvercv · urdrama · khfinder · sastra.biz</span>
+  </div>
+</footer>
+
+<script>
+/* ---------- i18n ---------- */
+const STR={
+ en:{},
+ km:{
+  "kick":"Sastra Solution Group — កម្ពុជា",
+  "h1a":"បច្ចេកវិទ្យាដែលមាន",
+  "h1b":"បេះដូង",
+  "h1c":"ខ្មែរ។",
+  "hsub":"យើងបង្កើត និងដំណើរការផលិតផលឌីជីថល — ចាប់ពីសំណូមពរព្រឹត្តិការណ៍ខ្មែរ រហូតដល់ប្រព័ន្ធគ្រប់គ្រងអាជីវកម្ម — ដែលរចនាឡើងនៅទីនេះ ប៉ុន្តែអាចប្រើប្រាស់បានគ្រប់ទីកន្លែង។",
+  "m1":"ផលិតផល",
+  "m2":"ភាសា (EN / ខ្មែរ)",
+  "m3":"បង្កើតនៅកម្ពុជា",
+  "nav_more":"ចំណុចបន្ថែម",
+  "p1_e":"ពិធីបុណ្យ ក្នុងទម្រង់ឌីជីថល",
+  "p1_b":"អញ្ជើញឌីជីថលដ៏ស្រស់ស្អាតសម្រាប់ពិធីបុណ្យខ្មែរគ្រប់ប្រភេទ — ការរៀបការ ការសន្យា ថ្ងៃកំណើត ការបើកហាង ពិធីបុណ្យសព និងផ្សេងៗទៀត។ មាន ៩ ប្រភេទពិធីបុណ្យ ដែលនីមួយៗមានសិល្បៈ ការផ្លាស់ប្តូរ (animation) និងបរិយាកាសផ្សេងៗគ្នា។ ភ្ញៀវអាចឆ្លើយតប (RSVP) បង់ប្រាក់តាមរយៈ ABA KHQR ហើយប្រាក់អំណោយនឹងបង្ហាញជាផលបូកបន្តផ្ទាល់នៅក្នុងក្រូចអំណោយនៅកន្លែងធ្វើពិធី។",
+  "p1_t1":"៩ ប្រភេទពិធីបុណ្យ",
+  "p1_t2":"ការបង់ប្រាក់តាម KHQR",
+  "p1_t3":"ក្រូចអំណោយបន្តផ្ទាល់",
+  "p1_t4":"ភាសាអង់គ្លេស + ភាសាខ្មែរ",
+  "visit":"ទស្សនា",
+  "p2_e":"អាជីព ដោះស្រាយដោយច្បាស់លាស់",
+  "p2_b":"អ្នកស្វែងរកការងារអាចអាប់ឡូត CV ហើយទទួលបានការវិភាគ ATS ភ្លាមៗ — ឃើញអ្វីដែលអ្នកជ្រើសរើសបុគ្គលិកមើលឃើញ អ្វីដែលខ្វះខាត និងអ្វីដែលត្រូវកែតម្រូវ។ AI ជួយសរសេរឡើងវិញ គំរូពីភាសា និងក្តារផ្សព្វផ្សាយការងារពេញវេលា និងការងារ Freelance ទូទាំងប្រទេសកម្ពុជា។",
+  "p2_t1":"ពិន្ទុ ATS",
+  "p2_t2":"ការសរសេរ CV ឡើងវិញដោយ AI",
+  "p2_t3":"ក្តារការងារ និងការងារ Freelance",
+  "p2_t4":"ការបង់ប្រាក់តាមរយៈ KHQR",
+  "p3_e":"រឿងដែលមើលមិនឱ្យឈប់",
+  "p3_b":"ផ្ទះសម្រាប់មើលរឿងខ្លី និង Reels — បេបរត់បញ្ចេញជាបន្តបន្ទាប់ ការមើលបន្តស្វ័យប្រវត្តិ ការជាសមាជិកជាមួយកូដប្រូម៉ូសិន និងស្ថិតិការមើល។ បង្កើតលើ Firebase និង Cloud Run ដើម្បីផ្គត់ផ្គង់បានរហ័សទូទាំងតំបន់។",
+  "p3_t1":"ការស្ត្រីមីងខ្លី",
+  "p3_t2":"ការជាសមាជិក",
+  "p3_t3":"ម៉ាស៊ីនផ្សព្វផ្សាយ",
+  "p3_t4":"ការវិភាគទិន្នន័យ",
+  "p4_e":"រកឃើញកម្ពុជា",
+  "p4_b":"ផែនទីរស់រវើកនៃកន្លែងដែលគួរទៅកម្សាន្ត — ភោជនីយដ្ឋាន កាហ្វេ ប្រាសាទ ទីកម្សាន្ត និងស្ថានីយបញ្ចូលថាមពល EV។ ការបង្ហាញពីសហគមន៍ជាមួយរូបថត និងការវាយតម្លៃ មណ្ឌលទីកម្សាន្តតាមខេត្ត និងការរកឃើញកន្លែងនៅជិតអ្នក។",
+  "p4_t1":"ផែនទីអន្តរកម្ម",
+  "p4_t2":"ការវាយតម្លៃពីសហគមន៍",
+  "p4_t3":"25 ខេត្ត និងរាជធានី",
+  "p4_t4":"PWA ដែលអាចប្រើបានទោះបីគ្មានអ៊ីនធឺណិតក៏ដោយ",
+  "p5_e":"គ្រប់គ្រងអាជីវកម្មទាំងមូល",
+  "p5_b":"វេទិកាអាជីវកម្មរបស់យើងសម្រាប់ក្រុមការងារ៖ ការតាមដានពេលវេលា ការងារ គម្រោង វិក្កយបត្រ ធនធានមនុស្ស CRM និងរបាយការណ៍ ក្នុងកន្លែងធ្វើការតែមួយ — បកប្រែជាភាសាខ្មែរពេញលេញ ដោយមានប្រព័ន្ធដោទាត់ AI ក្នុងកម្មវិធីដែលដំណើរការលើទិន្នន័យអាជីវកម្មរបស់អ្នក ដោយត្រូវការការអនុម័តពីអ្នកជានិច្ច។",
+  "p5_t1":"ERP · CRM · HRM · ATS",
+  "p5_t2":"ប្រព័ន្ធដោទាត់ AI + ឧបករណ៍",
+  "p5_t3":"ខ្លឹមសារ UI ជាភាសាខ្មែរចំនួន 5,800+",
+  "p5_t4":"ដំណើរការលើប្រព័ន្ធទ្រង់ខ្លួនឯង",
+  "open":"បើក",
+  "more_e":"ក្រុមក៏បានផ្ញើទំនិញផងដែរ",
+  "more_h":"ហើយសមាជិកគ្រួសារផ្សេងៗទៀត។",
+  "r_chess":"លេងស៊ីសង្វាក់ជាមួយម៉ាស៊ីនប្រកួតផ្ទាល់ ឬមិត្តភក្តិ — តារាងពិន្ទុ ការប្រកួតភ្លាមៗ និងអ៊ីនធឺរផេសបន្ទាត់ពីរភាសា។",
+  "r_card":"រចនាកាតសួរសុខទុក្ខខ្មែរ — ថ្ងៃកំណើត ថ្ងៃបុណ្យ កាតអរគុណ — ក្នុងរយៈពេលប៉ុន្មានវិនាទី តាមរយៈកម្មវិធីរុករក។",
+  "r_quiz":"កម្មវិធីប្រកួតប្រជែងសំណួរលើទូរសព្ទដៃ ដែលមានផ្ទាំងគ្រប់គ្រងសម្រាប់សំណួរ ប្រភេទ និងវគ្គរង្វាន់។",
+  "r_god":"ម្លប់ 3D ផ្ទាល់ ដែលតាមដានយន្តហោះ ឧបករណ៍ផ្សងព្រេង និងសំណង់ ក្នុងពេលពិតប្រាកដ។",
+  "r_plant":"កម្មវិធីជំនួយការថែរក្សារុក្ខជាតិ — ការរំលឹកដាក់ទឹក បណ្ណាល័យរុក្ខជាតិ និងក្រមកតាមដានការលូតលាស់ លើ Android។",
+  "r_book":"សៀវភៅចំណេះដឹងបើកចំហ អំពីការប្តូរលុយ និងពេលវេលា ដើម្បីសុខភាព និងសេរីភាព — ភាសាចិន / អង់គ្លេស / ខ្មែរ។",
+  "grp_e":"ក្រុមរបស់យើង",
+  "grp_lead":"ផលិតផល ១២ មុខ និងហាងមួយ ក្រុមការងារតែមួយ។ យើងចាប់ផ្តើមពីបញ្ហាដែលយើងអាចឃើញពីតុការងាររបស់យើងខ្លួន — ដូចជាអញ្ជើញដែលផ្ញើតាមមេសេន្ស័រ CV ដែលបាត់បង់ក្នុងប្រអប់អ៊ីមែល ឬកន្លែងដែលគ្មាន pin នៅលើផែនទី — ហើយយើងបញ្ចេញវា ដំណើរការវា និងរក្សាឱ្យវាលឿន។",
+  "pr1_h":"ខ្មែរជាអាទិភាព",
+  "pr1_p":"គាំទ្រភាសាខ្មែរពេញលេញ ការបង់ប្រាក់តាម KHQR និងការរចនាដែលគោរពប្រពៃណី និងទម្លាប់ក្នុងស្រុក។",
+  "pr2_h":"AI ដែលមានខ្សែក្រវាត់សុវត្ថិភាព",
+  "pr2_p":"មេរៀន AI ដែលសកម្មភាពលើទិន្នន័យជាក់ស្តែងរបស់ក្រុមហ៊ុន — ប៉ុន្តែគ្រប់ការផ្លាស់ប្តូរសំខាន់ៗ ត្រូវរង់ចាំការអនុម័តពីមនុស្ស។",
+  "pr3_h":"ស្រាល និងរស់រវើក",
+  "pr3_p":"ក្រុមការងារតូច ប្រើបច្ចេកវិទ្យាទំនើប ដំណើរការដាក់ឱ្យប្រើប្រាស់បានក្នុងរយៈពេលគ្រាន់តែប៉ុន្មាននាទី។ ផលិតផលគ្រប់មុខរបស់យើងកំពុងដំណើរការក្នុងបរិយាកាសផលិតកម្មពិតប្រាកដបច្ចុប្បន្ន។",
+  "f_prod":"ផលិតផល",
+  "f_comp":"ក្រុមហ៊ុន",
+  "f_all":"ផលិតផលទាំងអស់",
+  "f_about":"អំពីក្រុមហ៊ុន",
+  "f_top":"ត្រឡប់ទៅកំពូល",
+  "f_copy":"© Sastra Solution Group. ភ្នំពេញ កម្ពុជា។",
+  "s_nav":"ហាង",
+  "s_kick":"ទំនិញឌីជីថល — ទាញយកភ្លាមៗ",
+  "s_h":"ហាង Sastra",
+  "s_sub":"គំរូ និងឧបករណ៍ដែលយើងប្រើក្នុងការងាររបស់យើង។ បង់ប្រាក់តាមរយៈ KHQR ហើយទាញយកភ្លាមៗ — មិនចាំបាច់បង្កើតគណនីទេ។",
+  "s_buy":"ទិញឥឡូវនេះ",
+  "s_paid":"បានបង់ប្រាក់",
+  "s_price":"តម្លៃ",
+  "s_email_h":"អ៊ីមែលរបស់អ្នក",
+  "s_email_ph":"you@example.com",
+  "s_email_note":"យើងមិនផ្ញើអ្វីទាំងអស់ — សូមបញ្ចូលអ៊ីមែលពិតរបស់អ្នក វាគឺជាវិក្កយបត្រ និងកូដទាញយករបស់អ្នក។",
+  "s_scan":"ប្រើ ABA app របស់អ្នក ដើម្បីស្កេន",
+  "s_or":"ឬបើកតំណភ្ជាប់ការទូទាត់",
+  "s_wait":"កំពុងរង់ចាំការទូទាត់...",
+  "s_paid_ok":"បានបញ្ជាក់ការទូទាត់!",
+  "s_dl":"ទាញយក",
+  "s_expired":"KHQR បានផុតកំណត់ — សូមចាប់ផ្តើមម្តងទៀត",
+  "s_pending":"កំពុងរង់ចាំ",
+  "s_secure":"មានសុវត្ថិភាពដោយ CutLuy KHQR",
+  "s_back":"ត្រឡប់ទៅក្រុម",
+  "s_coming":"មានទំនិញថ្មីៗរាល់សប្តាហ៍។ កញ្ចប់នេះគឺជាដំណាក់កាលដំបូង។",
+  "s_cta":"រកមើលផ្ទាំងទំនិញ",
+  "grp_lead2":"ទំនិញ ១១ មុខ និងហាងមួយ ក្រុមការងារតែមួយ។ យើងចាប់ផ្តើមពីបញ្ហាដែលយើងអាចមើលឃើញពីតុការងាររបស់យើងខ្លួន — ការអញ្ជើញដែលផ្ញើតាមមេសេន្សែរ ឯកសារ CV ដែលបាត់បង់ក្នុងប្រអប់អ៊ីមែល ឬកន្លែងដែលគ្មានផ្លាកទីតាំងលើផែនទី — ហើយយើងបញ្ចេញវា ដំណើរការវា ហើយរក្សាវាឱ្យរហ័ស។",
+  "p6_e":"ទំនិញឌីជីថល ទទួលបានភ្លាមៗ",
+  "p6_b":"គំរូ និងស្លាយដែលយើងប្រើក្នុងការងាររបស់យើងខ្លួន — ដូចជា PPT Budget Proposal: តារាងថវិកាត្រីមាស និងខែ ការប្រៀបធៀបថវិកាទៅនឹងការចំណាយជាក់ស្តែង និងតារាងហិរញ្ញវត្ថុ Sankey។ បង់ប្រាក់តាមរយៈ ABA KHQR តាមរយៈ CutLuy ហើយទាញយកភ្លាមៗ។ មិនចាំបាច់បង្កើតគណនី មិនចាំបាច់រង់ចាំ។",
+  "p6_t1":"បង់ម្តង កាន់កាប់ជារៀងរហូត",
+  "p6_t2":"KHQR / ABA / Bakong",
+  "p6_t3":"ដឹកជញ្ជូនភ្លាមៗ",
+  "p6_t4":"ផលិតផលថ្មីរៀងរាល់សប្តាហ៍",
+  "p6_cta":"បើកហាង",
+  "soon":"កំពុងមកដល់",
+ }
+};
+const EN_CACHE={};
+function setLang(k){
+  document.documentElement.lang=k;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.dataset.i18n;
+    if(k==='en'){el.innerHTML=EN_CACHE[key]||el.innerHTML;}
+    else{
+      if(!EN_CACHE[key])EN_CACHE[key]=el.innerHTML;
+      if(STR.km[key])el.innerHTML=STR.km[key];
+    }
+  });
+  if(k==='en')document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;if(EN_CACHE[key])el.innerHTML=EN_CACHE[key];});
+  btnEn.setAttribute('aria-pressed',k==='en');btnKm.setAttribute('aria-pressed',k==='km');
+  localStorage.setItem('sg-lang',k);
+}
+/* ---------- theme ---------- */
+function setTheme(t){
+  document.documentElement.classList.toggle('light',t==='light');
+  document.getElementById('ic-moon').style.display=t==='light'?'none':'';
+  document.getElementById('ic-sun').style.display=t==='light'?'':'none';
+  localStorage.setItem('sg-theme',t);
+}
+const btnEn=document.getElementById('btn-en'),btnKm=document.getElementById('btn-km');
+btnEn.onclick=()=>setLang('en');btnKm.onclick=()=>setLang('km');
+document.getElementById('btn-theme').onclick=()=>setTheme(document.documentElement.classList.contains('light')?'dark':'light');
+// init persisted prefs
+setTheme(localStorage.getItem('sg-theme')||'dark');
+const savedLang=localStorage.getItem('sg-lang')||'en';
+if(savedLang!=='en')setLang(savedLang);
+
+/* ---------- nav scrolled ---------- */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+/* ---------- ticker ---------- */
+const items=[['khinvite','#d9b36a'],['TVERCV','#3b6fe0'],['UrDrama','#e0343c'],['KHFinder','#189a6c'],['Sastra Biz','#6e49e8'],['Sastra Store','#10b981'],['KHChess','#f2c14e'],['Card Design','#14b8a6'],['Sastra Quiz','#38bdf8'],['God\'s Eye View','#60a5fa'],['UrPlant','#65a30d']];
+const html=items.map(([n,c])=>`<span style="--dot:${c}"><em>◆</em><b>${n}</b></span>`).join('');
+document.getElementById('ticker').innerHTML=html+html;
+
+/* ---------- reveal + counts ---------- */
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.15});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+const co=new IntersectionObserver(es=>{es.forEach(e=>{
+  if(!e.isIntersecting)return;co.unobserve(e.target);
+  const el=e.target,end=+el.dataset.count;let t0=null;
+  const step=ts=>{if(!t0)t0=ts;const p=Math.min((ts-t0)/900,1);el.textContent=Math.round(end*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(step);};
+  requestAnimationFrame(step);
+})},{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(el=>co.observe(el));
+
+/* ---------- ghost parallax ---------- */
+const ghost=document.querySelector('.hero-ghost');
+addEventListener('scroll',()=>{if(scrollY<innerHeight)ghost.style.transform=`translateY(${scrollY*.18}px)`},{passive:true});
+
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>

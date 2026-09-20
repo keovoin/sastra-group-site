@@ -1,0 +1,9 @@
+# local artifacts
+.env.local
+.vercel/
+shots/
+km_trans.log
+ux_report.json
+store/khi_anon.txt
+__pycache__/
+index-v1-modern.html

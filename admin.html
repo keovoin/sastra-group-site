@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sastra Store — Admin</title>
+
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,480;9..144,600&family=Public+Sans:wght@400;500;600;700&family=Noto+Sans+Khmer:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{--canvas:#131211;--surface:#1b1917;--surface-2:#211f1c;--line:rgba(240,230,210,.09);--text:#efe9df;--muted:#a99f91;--faint:#8a7f6f;--gold:#d9b36a;--ok:#10b981;--bad:#ff6b6b;--font-display:"Fraunces",serif;--font-body:"Public Sans",system-ui,sans-serif}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{background:var(--canvas);color:var(--text);font-family:var(--font-body);line-height:1.6;min-height:100svh}
+
+a{color:inherit;text-decoration:none}
+
+.top{display:flex;align-items:center;justify-content:space-between;padding:16px clamp(16px,3vw,40px);border-bottom:1px solid var(--line)}
+
+.brand{font-family:var(--font-display);font-weight:600;font-size:18px}
+
+.brand b{color:var(--gold)}
+
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(20px,4vh,44px) clamp(16px,3vw,40px)}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:clamp(18px,2.6vw,30px);margin-bottom:22px}
+
+h2{font-family:var(--font-display);font-weight:480;font-size:22px;margin-bottom:14px}
+
+label{font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--muted);display:block;margin:12px 0 6px}
+
+input[type=text],input[type=password],input[type=number],textarea{
+
+  width:100%;background:var(--canvas);border:1px solid var(--line);border-radius:9px;color:var(--text);
+
+  font:500 14.5px var(--font-body);padding:12px 14px;outline:none;min-height:46px}
+
+textarea{min-height:88px;line-height:1.6}
+
+input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(217,179,106,.18)}
+
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+@media(max-width:640px){.row2{grid-template-columns:1fr}}
+
+.btn{border:0;cursor:pointer;font:700 12.5px var(--font-body);letter-spacing:.05em;text-transform:uppercase;border-radius:9px;padding:14px 22px;min-height:46px;transition:transform .3s;display:inline-flex;align-items:center;gap:9px}
+
+.btn:hover{transform:translateY(-2px)}
+
+.btn.gold{background:var(--gold);color:var(--canvas)}
+
+.btn.ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}
+
+.btn.bad{background:transparent;color:var(--bad);border:1px solid rgba(255,107,107,.4)}
+
+.btn.okb{background:transparent;color:var(--ok);border:1px solid rgba(16,185,129,.4)}
+
+button.small{padding:8px 14px;min-height:36px;font-size:11px}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+
+th{text-align:left;color:var(--faint);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:10px 12px;border-bottom:1px solid var(--line)}
+
+td{padding:12px;border-bottom:1px solid var(--line);vertical-align:middle}
+
+td img{width:64px;height:40px;object-fit:cover;border-radius:6px;border:1px solid var(--line)}
+
+.pill{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;font-weight:700}
+
+.pill.on{background:rgba(16,185,129,.16);color:var(--ok)}
+
+.pill.off{background:rgba(138,127,111,.16);color:var(--faint)}
+
+.msg{font-size:13px;min-height:20px;margin-top:10px}
+
+.msg.ok{color:var(--ok)}.msg.bad{color:var(--bad)}
+
+.grid-form{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+
+@media(max-width:700px){.grid-form{grid-template-columns:1fr}}
+
+.upl{border:1px dashed var(--line);border-radius:10px;padding:14px;font-size:13px;color:var(--muted);margin-top:8px;display:flex;flex-direction:column;gap:10px}
+
+.upl input[type=file]{font-size:13px;color:var(--muted)}
+
+.hide{display:none}
+
+.stats{display:flex;gap:clamp(18px,4vw,44px);flex-wrap:wrap;margin-bottom:18px}
+
+.stat .n{font-family:var(--font-display);font-size:30px;font-weight:600}
+
+.stat .l{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="top">
+
+  <span class="brand">Sastra <b>Store CMS</b></span>
+
+  <a class="btn ghost small" href="store.html">View storefront →</a>
+
+</div>
+
+
+
+<div class="wrap">
+
+  <!-- LOGIN -->
+
+  <div class="card" id="login" style="max-width:420px;margin:60px auto">
+
+    <h2>Sign in</h2>
+
+    <label>Admin passcode</label>
+
+    <input type="password" id="pass" autocomplete="current-password">
+
+    <div class="msg" id="lmsg"></div>
+
+    <button class="btn gold" id="lgo" style="width:100%;margin-top:8px;justify-content:center">Unlock</button>
+
+  </div>
+
+
+
+  <!-- DASH -->
+
+  <div id="dash" class="hide">
+
+    <div class="card">
+
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
+
+        <h2 style="margin:0">Products</h2>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+
+          <button class="btn gold" id="newp">+ New product</button>
+
+          <button class="btn ghost small" id="chpass">Change passcode</button>
+
+          <button class="btn ghost small" id="logout">Lock</button>
+
+        </div>
+
+      </div>
+
+      <div class="stats" id="stats" style="margin-top:18px"></div>
+
+      <div style="overflow-x:auto"><table id="ptable">
+
+        <thead><tr><th></th><th>Title</th><th>Slug</th><th>Price</th><th>Status</th><th></th></tr></thead>
+
+        <tbody></tbody>
+
+      </table></div>
+
+    </div>
+
+
+
+    <!-- EDIT FORM -->
+
+    <div class="card hide" id="editor">
+
+      <h2 id="etitle">New product</h2>
+
+      <div class="grid-form">
+
+        <div><label>Title (EN)</label><input type="text" id="f-title"></div>
+
+        <div><label>Slug (url)</label><input type="text" id="f-slug" placeholder="my-new-deck"></div>
+
+      </div>
+
+      <label>Description (EN)</label><textarea id="f-desc"></textarea>
+
+      <label>Description (ខ្មែរ) — optional</label><textarea id="f-desc-km"></textarea>
+
+      <div class="row2">
+
+        <div><label>Price USD</label><input type="number" id="f-price" min="0.5" step="0.01" value="4.99"></div>
+
+        <div><label>Sort order</label><input type="number" id="f-sort" value="0"></div>
+
+      </div>
+
+      <div class="upl">
+
+        <div><b style="color:var(--text)">Product file (.pptx/.zip/.pdf…)</b> — stored private, buyer gets 24h link</div>
+
+        <input type="file" id="f-file">
+
+        <div class="msg" id="file-state" style="color:var(--ok)"></div>
+
+        <button class="btn ghost small" id="up-file" type="button">Upload product file</button>
+
+      </div>
+
+      <div class="upl">
+
+        <div><b style="color:var(--text)">Cover image</b> — public, shown in the grid</div>
+
+        <input type="file" id="f-cov" accept="image/*">
+
+        <div class="msg" id="cov-state"></div>
+
+        <button class="btn ghost small" id="up-cov" type="button">Upload cover</button>
+
+      </div>
+
+      <div class="msg" id="fmsg"></div>
+
+      <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+
+        <button class="btn gold" id="save">Save product</button>
+
+        <button class="btn ghost" id="cancel">Cancel</button>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ORDERS -->
+
+    <div class="card">
+
+      <h2>Orders</h2>
+
+      <div style="overflow-x:auto"><table id="otable">
+
+        <thead><tr><th>Product</th><th>Email</th><th>Amount</th><th>Status</th><th>When</th></tr></thead>
+
+        <tbody></tbody>
+
+      </table></div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<script src="assets/sk.js"></script>
+
+<script>
+
+const SUPA_URL="https://vdhiiatsnbbizxsmhrxf.supabase.co";
+
+const ANON=window.__SK__||"";
+
+const AURL=SUPA_URL+"/functions/v1/store-admin";
+
+let PASS=sessionStorage.getItem('sgadm')||"";
+
+
+
+async function call(body,form){
+
+  const opt=form?{method:'POST',headers:{'apikey':ANON},body:form}
+
+    :{method:'POST',headers:{'Content-Type':'application/json','apikey':ANON},body:JSON.stringify({pass:PASS,...body})};
+
+  const r=await fetch(AURL,opt);
+
+  const j=await r.json().catch(()=>({}));
+
+  return {s:r.status,j};
+
+}
+
+async function refresh(){
+
+  const {s,j}=await call({action:'list'});
+
+  if(s===401){lock();return;}
+
+  PRODUCTS=j.products||[];ORDERS=j.orders||[];render();
+
+}
+
+function money(a){return '$'+Number(a).toFixed(2)}
+
+function render(){
+
+  const paid=ORDERS.filter(o=>o.status==='paid'||o.status==='delivered');
+
+  const rev=paid.reduce((s,o)=>s+Number(o.amount),0);
+
+  document.getElementById('stats').innerHTML=
+
+    `<div class="stat"><div class="n">${PRODUCTS.length}</div><div class="l">Products</div></div>
+
+     <div class="stat"><div class="n">${PRODUCTS.filter(p=>p.active).length}</div><div class="l">Live</div></div>
+
+     <div class="stat"><div class="n">${paid.length}</div><div class="l">Paid orders</div></div>
+
+     <div class="stat"><div class="n">${money(rev)}</div><div class="l">Revenue</div></div>`;
+
+  document.querySelector('#ptable tbody').innerHTML=PRODUCTS.map(p=>
+
+   `<tr><td><img src="${p.cover_url||''}" alt="" onerror="this.style.visibility='hidden'"></td>
+
+    <td><b>${p.title}</b></td><td style="color:var(--faint)">${p.slug}</td><td>${money(p.price_usd)}</td>
+
+    <td><span class="pill ${p.active?'on':'off'}">${p.active?'live':'hidden'}</span></td>
+
+    <td style="text-align:right;white-space:nowrap">
+
+      <button class="btn ghost small" data-ed="${p.id}">Edit</button>
+
+      <button class="btn ${p.active?'bad':'okb'} small" data-tg="${p.id}">${p.active?'Hide':'Publish'}</button>
+
+      <button class="btn ghost small" data-del="${p.id}">Delete</button></td></tr>`).join('');
+
+  document.querySelector('#otable tbody').innerHTML=ORDERS.slice(0,40).map(o=>{
+
+    const p=PRODUCTS.find(x=>x.id===o.product_id);
+
+    return `<tr><td>${p?p.title:'—'}</td><td>${o.buyer_email||''}</td><td>${money(o.amount)}</td>
+
+      <td><span class="pill ${o.status==='paid'||o.status==='delivered'?'on':'off'}">${o.status}</span></td>
+
+      <td style="color:var(--faint)">${new Date(o.created_at).toLocaleString()}</td></tr>`;}).join('')
+
+    ||'<tr><td colspan="5" style="color:var(--faint)">No orders yet.</td></tr>';
+
+  document.querySelectorAll('[data-ed]').forEach(b=>b.onclick=()=>edit(b.dataset.ed));
+
+  document.querySelectorAll('[data-tg]').forEach(b=>b.onclick=async()=>{await call({action:'toggle',id:b.dataset.tg,active:!PRODUCTS.find(p=>p.id===b.dataset.tg).active});refresh();});
+
+  document.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{
+
+    if(!confirm('Delete this product?'))return;
+
+    const {j}=await call({action:'delete',id:b.dataset.del});
+
+    if(j.error){alert('Cannot delete: '+j.error+' (has orders → hide it instead)');}
+
+    refresh();});
+
+}
+
+let editing=null;
+
+function blank(){editing=null;['f-title','f-slug','f-desc','f-desc-km'].forEach(i=>document.getElementById(i).value='');
+
+  document.getElementById('f-price').value='4.99';document.getElementById('f-sort').value='0';
+
+  document.getElementById('file-state').textContent='';document.getElementById('cov-state').textContent='';
+
+  document.getElementById('f-file').value='';document.getElementById('f-cov').value='';
+
+  document.getElementById('etitle').textContent='New product';document.getElementById('fmsg').textContent='';}
+
+function edit(id){const p=PRODUCTS.find(x=>x.id===id);if(!p)return;editing=p;
+
+  document.getElementById('etitle').textContent='Edit: '+p.title;
+
+  document.getElementById('f-title').value=p.title;document.getElementById('f-slug').value=p.slug;
+
+  document.getElementById('f-desc').value=p.description||'';document.getElementById('f-desc-km').value=p.description_km||'';
+
+  document.getElementById('f-price').value=p.price_usd;document.getElementById('f-sort').value=p.sort||0;
+
+  document.getElementById('file-state').textContent=p.file_path?'Current: '+p.file_path:'';
+
+  document.getElementById('editor').classList.remove('hide');document.getElementById('editor').scrollIntoView({behavior:'smooth'});}
+
+document.getElementById('newp').onclick=()=>{blank();document.getElementById('editor').classList.remove('hide');document.getElementById('editor').scrollIntoView({behavior:'smooth'});};
+
+document.getElementById('cancel').onclick=()=>document.getElementById('editor').classList.add('hide');
+
+async function upload(kind,input,msgEl){
+
+  const f=input.files[0];if(!f){msgEl.textContent='Choose a file first';msgEl.className='msg bad';return;}
+
+  const fd=new FormData();fd.append('pass',PASS);fd.append('kind',kind);
+
+  fd.append('slug',document.getElementById('f-slug').value||document.getElementById('f-title').value.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')||'misc');
+
+  fd.append('file',f);
+
+  msgEl.textContent='Uploading…';msgEl.className='msg';
+
+  const {s,j}=await call(null,fd);
+
+  if(s!==200){msgEl.textContent=j.error||'Upload failed';msgEl.className='msg bad';return;}
+
+  if(kind==='file'){document.getElementById('file-state').textContent='OK: '+j.file_path;msgEl.textContent='';}
+
+  else{document.getElementById('cov-state').textContent='Cover uploaded ✓';document.getElementById('cov-state').className='msg ok';
+
+    document.getElementById('cov-url')&&document.getElementById('cov-url').setAttribute('data-url',j.url);
+
+    window.__lastCover=j.url;}
+
+}
+
+document.getElementById('up-file').onclick=()=>upload('file',document.getElementById('f-file'),document.getElementById('file-state'));
+
+document.getElementById('up-cov').onclick=()=>upload('cover',document.getElementById('f-cov'),document.getElementById('cov-state'));
+
+document.getElementById('save').onclick=async()=>{
+
+  const fm=document.getElementById('fmsg');fm.textContent='Saving…';fm.className='msg';
+
+  const product={id:editing?editing.id:undefined,
+
+    title:document.getElementById('f-title').value,slug:document.getElementById('f-slug').value,
+
+    description:document.getElementById('f-desc').value,description_km:document.getElementById('f-desc-km').value,
+
+    price_usd:document.getElementById('f-price').value,sort:document.getElementById('f-sort').value,
+
+    active:editing?editing.active:true,
+
+    cover_url:window.__lastCover||(editing&&editing.cover_url)||'',
+
+    file_path:(document.getElementById('file-state').textContent.replace('OK: ','').replace('Current: ',''))||(editing&&editing.file_path)||'',
+
+    file_name:editing&&editing.file_name?editing.file_name:''};
+
+  if(window.__lastCover)product.file_name=product.file_name;
+
+  const f=document.getElementById('f-file').files[0];if(f)product.file_name=f.name.replace(/[^A-Za-z0-9._-]+/g,'_').slice(-80);
+
+  const {s,j}=await call({action:'save',product});
+
+  if(s!==200){fm.textContent=j.error||'Save failed';fm.className='msg bad';return;}
+
+  window.__lastCover=null;fm.textContent='Saved ✓';fm.className='msg ok';
+
+  document.getElementById('editor').classList.add('hide');refresh();
+
+};
+
+document.getElementById('chpass').onclick=async()=>{
+
+  const np=prompt('New passcode (min 6 chars):');if(!np)return;
+
+  const {s,j}=await call({action:'change-pass',new_pass:np});
+
+  if(s===200){PASS=np;sessionStorage.setItem('sgadm',np);alert('Passcode changed.');}
+
+  else alert(j.error||'Failed');
+
+};
+
+function lock(){sessionStorage.removeItem('sgadm');PASS="";document.getElementById('dash').classList.add('hide');document.getElementById('login').classList.remove('hide');}
+
+document.getElementById('logout').onclick=lock;
+
+async function unlock(){
+
+  const {s,j}=await call({action:'login'});
+
+  if(s===200&&j.ok){sessionStorage.setItem('sgadm',PASS);
+
+    document.getElementById('login').classList.add('hide');document.getElementById('dash').classList.remove('hide');refresh();}
+
+  else{document.getElementById('lmsg').textContent='Wrong passcode';document.getElementById('lmsg').className='msg bad';}
+
+}
+
+document.getElementById('lgo').onclick=unlock;
+
+document.getElementById('pass').addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});
+
+if(ANON.length!==208){document.getElementById('lmsg').textContent='Key file missing (assets/sk.js)';}
+
+const saved=sessionStorage.getItem('sgadm');
+
+if(saved){PASS=saved;unlock();}
+
+</script>
+
+</body>
+
+</html>
+
