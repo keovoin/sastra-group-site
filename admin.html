@@ -279,9 +279,9 @@ let PASS=sessionStorage.getItem('sgadm')||"";
 
 async function call(body,form){
 
-  const opt=form?{method:'POST',headers:{'apikey':ANON,Authorization:window.__B__+ANON_KEY},body:form}
+  const opt=form?{method:'POST',headers:{'apikey':ANON,Authorization:window.__B__+ANON},body:form}
 
-    :{method:'POST',headers:{'Content-Type':'application/json','apikey':ANON,Authorization:window.__B__+ANON_KEY},body:JSON.stringify({pass:PASS,...body})};
+    :{method:'POST',headers:{'Content-Type':'application/json','apikey':ANON,Authorization:window.__B__+ANON},body:JSON.stringify({pass:PASS,...body})};
 
   const r=await fetch(AURL,opt);
 
@@ -473,7 +473,7 @@ function lock(){sessionStorage.removeItem('sgadm');PASS="";document.getElementBy
 
 document.getElementById('logout').onclick=lock;
 
-async function unlock(){
+async function unlock(){PASS=document.getElementById('pass').value||PASS;
 
   const {s,j}=await call({action:'login'});
 

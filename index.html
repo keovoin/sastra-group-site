@@ -108,7 +108,7 @@ body::after{
 .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;height:1px;width:0;background:var(--gold);transition:width .35s var(--ease)}
 .nav-links a:hover{color:var(--text)}
 .nav-links a:hover::after{width:100%}
-.nav-tools{display:flex;align-items:center;gap:10px;margin-left:auto}
+.nav-tools{display:flex;align-items:center;gap:10px;margin-left:auto;flex-wrap:wrap}
 .lang-sw{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
 .lang-sw button{font:600 13px/1 var(--font-body);letter-spacing:.04em;cursor:pointer;background:transparent;color:var(--muted);border:0;padding:11px 14px;transition:background .3s,color .3s}
 .lang-sw button[aria-pressed="true"]{background:var(--gold);color:var(--canvas)}
@@ -118,6 +118,7 @@ body::after{
 }
 .theme-sw:hover{color:var(--gold);border-color:var(--gold);transform:rotate(20deg)}
 @media(max-width:900px){.nav-links{display:none}}
+@media(max-width:430px){.nav{gap:8px;padding-left:14px;padding-right:14px}.nav-mark{font-size:15px}.nav-mark .kh{display:none}.lang-sw button{padding:10px 9px;font-size:11.5px;letter-spacing:0}.theme-sw{width:36px;height:36px}.hero-ghost{transform:scale(.78);opacity:.10}}
 
 /* ------- hero ------- */
 .hero{
@@ -127,7 +128,7 @@ body::after{
 }
 .hero-ghost{
   position:absolute;right:-3vw;top:4vh;font-family:var(--font-khmer);
-  font-size:clamp(130px,26vw,420px);line-height:1;color:transparent;
+  font-size:clamp(92px,24vw,420px);line-height:1;color:transparent;
   -webkit-text-stroke:1px color-mix(in srgb,var(--gold) 24%,transparent);
   user-select:none;pointer-events:none;clip-path:inset(0);
   animation:ghostdrift 16s ease-in-out infinite alternate;
@@ -314,6 +315,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
   .hero-kicker,.hero-sub,.hero-meta,.scroll-cue{opacity:1;transform:none;animation:none}
   .ticker-track{animation:none}
 }
+@media(max-width:600px){.cta{width:100%;justify-content:center;padding:17px 20px}.hero-meta{gap:18px 26px}.hero h1{font-size:clamp(34px,9.6vw,44px)}}
 </style>
 </head>
 <body>
@@ -321,14 +323,14 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
 <nav class="nav" id="nav">
   <a class="nav-mark" href="#top">Sastra Solution <span class="kh">សាស្ត្រា</span></a>
   <div class="nav-links">
+    <a href="#store" data-i18n="nav_store" style="color:var(--gold);font-weight:700">Store</a>
     <a href="#khinvite">khinvite</a>
     <a href="#tvercv">TVERCV</a>
     <a href="#urdrama">UrDrama</a>
     <a href="#khfinder">KHFinder</a>
     <a href="#biz">Sastra Biz</a>
-    <a href="#store">Store</a>
     <a href="#more" data-i18n="nav_more">More</a>
-  </div>
+    </div>
   <div class="nav-tools">
     <div class="lang-sw" role="group" aria-label="Language">
       <button id="btn-en" aria-pressed="true">EN</button>
@@ -351,7 +353,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
   </h1>
   <p class="hero-sub" data-i18n="hsub">We build and operate digital products — from Khmer event invitations to enterprise management — designed here, used everywhere.</p>
   <div class="hero-meta">
-    <div class="cell"><div class="n" data-count="12">0</div><div class="l" data-i18n="m1">Products</div></div>
+    <div class="cell"><div class="n" data-count="13">0</div><div class="l" data-i18n="m1">Products</div></div>
     <div class="cell"><div class="n" data-count="2">0</div><div class="l" data-i18n="m2">Languages (EN / ខ្មែរ)</div></div>
     <div class="cell"><div class="n" style="font-size:clamp(20px,2.4vw,32px)">KH ⇄ World</div><div class="l" data-i18n="m3">Built in Cambodia</div></div>
   </div>
@@ -362,11 +364,37 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
   <div class="ticker-track" id="ticker"></div>
 </div>
 
+<!-- store -->
+<section class="section prod" id="store" style="--prod:#10b981">
+  <div class="split flip">
+    <div class="copy">
+      <div class="eyebrow rv"><span class="idx">01</span> <span data-i18n="p6_e">Digital goods, instant</span></div>
+      <h2 class="big rv rv-d1">Sastra Store</h2>
+      <p class="prose rv rv-d2" data-i18n="p6_b">Templates and decks we use in our own work — like the <strong>PPT Budget Proposal</strong>: quarterly and monthly budget tables, budget vs actual, Sankey financial charts. Pay with <strong>ABA KHQR</strong> through CutLuy, download lands instantly. No account, no waiting.</p>
+      <div class="tags rv rv-d2">
+        <span class="tag" data-i18n="p6_t1">Pay once, own forever</span><span class="tag" data-i18n="p6_t2">KHQR / ABA / Bakong</span>
+        <span class="tag" data-i18n="p6_t3">Instant delivery</span><span class="tag" data-i18n="p6_t4">New drops weekly</span>
+      </div>
+      <a class="cta rv" href="store.html"><span data-i18n="p6_cta">Open the store</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></a>
+    </div>
+    <div class="shot rv rv-d1">
+      <div class="shot-window">
+        <div class="shot-bar"><i></i><i></i><i></i><span class="addr">sastra-group.vercel.app/store</span></div>
+        <img src="assets/th-ppt-cover.webp" alt="PPT Budget Proposal deck" loading="lazy">
+      </div>
+      <div class="logo-badge" style="font-family:var(--font-display);font-weight:600;color:#10b981;font-size:30px">$</div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
 <!-- khinvite -->
 <section class="section prod" id="khinvite" style="--prod:#d9b36a">
   <div class="split">
     <div class="copy">
-      <div class="eyebrow rv"><span class="idx">01</span> <span data-i18n="p1_e">Celebrations, digitized</span></div>
+      <div class="eyebrow rv"><span class="idx">02</span> <span data-i18n="p1_e">Celebrations, digitized</span></div>
       <h2 class="big rv rv-d1">khinvite.com</h2>
       <p class="prose rv rv-d2" data-i18n="p1_b">Elegant <strong data-i18n="p1_bs">digital invitations for every Khmer occasion</strong> — weddings, engagements, birthdays, shop openings, memorial services and more. Nine event types, each with its own art, animation and atmosphere. Guests RSVP, pay by ABA KHQR, and gift money lands on a live kiosk total at the venue.</p>
       <div class="tags rv rv-d2">
@@ -392,7 +420,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
 <section class="section prod" id="tvercv" style="--prod:#3b6fe0">
   <div class="split flip">
     <div class="copy">
-      <div class="eyebrow rv"><span class="idx">02</span> <span data-i18n="p2_e">Careers, decoded</span></div>
+      <div class="eyebrow rv"><span class="idx">03</span> <span data-i18n="p2_e">Careers, decoded</span></div>
       <h2 class="big rv rv-d1">tvercv.com</h2>
       <p class="prose rv rv-d2" data-i18n="p2_b">Job seekers upload a CV and get an <strong>ATS analysis</strong> instantly — what recruiters see, what's missing, what to fix. AI rewrites, bilingual templates, and a live board of jobs and freelance gigs across Cambodia.</p>
       <div class="tags rv rv-d2">
@@ -418,7 +446,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
 <section class="section prod" id="urdrama" style="--prod:#e0343c">
   <div class="split">
     <div class="copy">
-      <div class="eyebrow rv"><span class="idx">03</span> <span data-i18n="p3_e">Stories that binge</span></div>
+      <div class="eyebrow rv"><span class="idx">04</span> <span data-i18n="p3_e">Stories that binge</span></div>
       <h2 class="big rv rv-d1">UrDrama</h2>
       <p class="prose rv rv-d2" data-i18n="p3_b">A streaming home for <strong>short drama and reels</strong> — vertical episodes, auto-continuing playback, subscriptions with promo codes, and watch statistics. Built on Firebase + Cloud Run, delivered fast across the region.</p>
       <div class="tags rv rv-d2">
@@ -444,7 +472,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
 <section class="section prod" id="khfinder" style="--prod:#189a6c">
   <div class="split flip">
     <div class="copy">
-      <div class="eyebrow rv"><span class="idx">04</span> <span data-i18n="p4_e">Discover Cambodia</span></div>
+      <div class="eyebrow rv"><span class="idx">05</span> <span data-i18n="p4_e">Discover Cambodia</span></div>
       <h2 class="big rv rv-d1">khfinder.com</h2>
       <p class="prose rv rv-d2" data-i18n="p4_b">A living map of places worth going to — restaurants, cafés, temples, attractions, EV charging. Community listings with photos and reviews, <strong>province-by-province attraction guides</strong>, and near-me discovery on MapLibre.</p>
       <div class="tags rv rv-d2">
@@ -470,7 +498,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
 <section class="section prod" id="biz" style="--prod:#6e49e8">
   <div class="split">
     <div class="copy">
-      <div class="eyebrow rv"><span class="idx">05</span> <span data-i18n="p5_e">Run the whole company</span></div>
+      <div class="eyebrow rv"><span class="idx">06</span> <span data-i18n="p5_e">Run the whole company</span></div>
       <h2 class="big rv rv-d1">Sastra Biz</h2>
       <p class="prose rv rv-d2" data-i18n="p5_b">Our enterprise platform for the team: <strong>time tracking, tasks, projects, invoices, HR, CRM and reports</strong> in one workspace — fully Khmer-localised, with an in-app AI assistant that acts on your own company data, always behind an approval click.</p>
       <div class="tags rv rv-d2">
@@ -492,35 +520,9 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
 
 <div class="rule"></div>
 
-<!-- store -->
-<section class="section prod" id="store" style="--prod:#10b981">
-  <div class="split flip">
-    <div class="copy">
-      <div class="eyebrow rv"><span class="idx">06</span> <span data-i18n="p6_e">Digital goods, instant</span></div>
-      <h2 class="big rv rv-d1">Sastra Store</h2>
-      <p class="prose rv rv-d2" data-i18n="p6_b">Templates and decks we use in our own work — like the <strong>PPT Budget Proposal</strong>: quarterly and monthly budget tables, budget vs actual, Sankey financial charts. Pay with <strong>ABA KHQR</strong> through CutLuy, download lands instantly. No account, no waiting.</p>
-      <div class="tags rv rv-d2">
-        <span class="tag" data-i18n="p6_t1">Pay once, own forever</span><span class="tag" data-i18n="p6_t2">KHQR / ABA / Bakong</span>
-        <span class="tag" data-i18n="p6_t3">Instant delivery</span><span class="tag" data-i18n="p6_t4">New drops weekly</span>
-      </div>
-      <a class="cta rv" href="store.html"><span data-i18n="p6_cta">Open the store</span>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></a>
-    </div>
-    <div class="shot rv rv-d1">
-      <div class="shot-window">
-        <div class="shot-bar"><i></i><i></i><i></i><span class="addr">sastra-group.vercel.app/store</span></div>
-        <img src="assets/th-ppt-cover.webp" alt="PPT Budget Proposal deck" loading="lazy">
-      </div>
-      <div class="logo-badge" style="font-family:var(--font-display);font-weight:600;color:#10b981;font-size:30px">$</div>
-    </div>
-  </div>
-</section>
-
-<div class="rule"></div>
-
 <!-- more products -->
 <section class="section" id="more">
-  <div class="eyebrow rv" style="--prod:var(--gold)"><span class="idx">07</span> <span data-i18n="more_e">Also shipping from the group</span></div>
+  <div class="eyebrow rv" style="--prod:var(--gold)"><span class="idx">—</span> <span data-i18n="more_e">Also shipping from the group</span></div>
   <h2 class="big rv rv-d1" data-i18n="more_h">And the rest of the family.</h2>
   <div class="more-list rv rv-d2">
     <a class="more-card" style="--more-c:#f2c14e" href="https://kh-chess-app.vercel.app" target="_blank" rel="noopener">
@@ -528,7 +530,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
       <div class="more-body">
         <span class="name">KHChess</span>
         <span class="desc" data-i18n="r_chess">Play chess against a live engine or friends — leaderboards, instant matches, bilingual board UI.</span>
-        <div class="more-foot"><span class="num">08</span>
+        <div class="more-foot"><span class="num">07</span>
           <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
       </div>
     </a>
@@ -537,7 +539,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
       <div class="more-body">
         <span class="name">Sastra Card Design</span>
         <span class="desc" data-i18n="r_card">Design Khmer greeting cards — birthdays, holidays, thank-you cards — in seconds, in the browser.</span>
-        <div class="more-foot"><span class="num">09</span>
+        <div class="more-foot"><span class="num">08</span>
           <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
       </div>
     </a>
@@ -546,7 +548,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
       <div class="more-body">
         <span class="name">Sastra Quiz</span>
         <span class="desc" data-i18n="r_quiz">Mobile quiz competition with an admin panel for questions, categories and prize rounds.</span>
-        <div class="more-foot"><span class="num">10</span>
+        <div class="more-foot"><span class="num">09</span>
           <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
       </div>
     </a>
@@ -555,7 +557,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
       <div class="more-body">
         <span class="name">God's Eye View</span>
         <span class="desc" data-i18n="r_god">A live 3D globe tracking planes, satellites and ships in real time.</span>
-        <div class="more-foot"><span class="num">11</span>
+        <div class="more-foot"><span class="num">10</span>
           <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
       </div>
     </a>
@@ -564,6 +566,15 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
       <div class="more-body">
         <span class="name">UrPlant</span>
         <span class="desc" data-i18n="r_plant">Plant-care companion app — watering reminders, plant library and growth journal on Android.</span>
+        <div class="more-foot"><span class="num">11</span>
+          <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
+      </div>
+    </a>
+        <a class="more-card" style="--more-c:#e879a0" href="https://knowitall-kh.com" target="_blank" rel="noopener">
+      <div class="more-thumb"><img src="assets/th-know.webp" alt="Sastra KH-HELPER" loading="lazy"></div>
+      <div class="more-body">
+        <span class="name">Sastra KH-HELPER</span>
+        <span class="desc" data-i18n="r_know">All-in-one Cambodia helper — tax calculators, loan comparison, government guides and community Q&amp;A.</span>
         <div class="more-foot"><span class="num">12</span>
           <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
       </div>
@@ -585,7 +596,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
   <div class="eyebrow rv"><span class="idx">—</span> <span data-i18n="grp_e">The group</span></div>
   <div class="about-grid">
     <div>
-      <p class="about-lead rv" data-i18n="grp_lead">Twelve products and a store, one team. We start with a problem we can see from our own desk — an invitation sent by messenger, a CV lost in an inbox, a place with no pin on the map — and we <em>ship it, run it, and keep it fast.</em></p>
+      <p class="about-lead rv" data-i18n="grp_lead">Thirteen products, one team. We start with a problem we can see from our own desk — an invitation sent by messenger, a CV lost in an inbox, a place with no pin on the map — and we <em>ship it, run it, and keep it fast.</em></p>
     </div>
     <div class="principles rv rv-d1">
       <div class="principle" style="--pcol:#d9b36a">
@@ -694,7 +705,7 @@ const STR={
   "r_plant":"កម្មវិធីជំនួយការថែរក្សារុក្ខជាតិ — ការរំលឹកដាក់ទឹក បណ្ណាល័យរុក្ខជាតិ និងក្រមកតាមដានការលូតលាស់ លើ Android។",
   "r_book":"សៀវភៅចំណេះដឹងបើកចំហ អំពីការប្តូរលុយ និងពេលវេលា ដើម្បីសុខភាព និងសេរីភាព — ភាសាចិន / អង់គ្លេស / ខ្មែរ។",
   "grp_e":"ក្រុមរបស់យើង",
-  "grp_lead":"ផលិតផល ១២ មុខ និងហាងមួយ ក្រុមការងារតែមួយ។ យើងចាប់ផ្តើមពីបញ្ហាដែលយើងអាចឃើញពីតុការងាររបស់យើងខ្លួន — ដូចជាអញ្ជើញដែលផ្ញើតាមមេសេន្ស័រ CV ដែលបាត់បង់ក្នុងប្រអប់អ៊ីមែល ឬកន្លែងដែលគ្មាន pin នៅលើផែនទី — ហើយយើងបញ្ចេញវា ដំណើរការវា និងរក្សាឱ្យវាលឿន។",
+  "grp_lead":"ទំនិញ ១៣ មុខ និងហាងមួយ ក្រុមការងារតែមួយ។ យើងចាប់ផ្តើមពីបញ្ហាដែលយើងឃើញពីតុការងាររបស់យើងផ្ទាល់ — ការអញ្ជើញផ្ញើតាមមេសេន្ស័រ CV បាត់បង់ក្នុងប្រអប់សារ ឬទីកន្លែងដែលគ្មានស្លាកលើផែនទី — ហើយយើងបញ្ជូនវា ដំណើរការវា និងរក្សាវាឱ្យរហ័ស។",
   "pr1_h":"ខ្មែរជាអាទិភាព",
   "pr1_p":"គាំទ្រភាសាខ្មែរពេញលេញ ការបង់ប្រាក់តាម KHQR និងការរចនាដែលគោរពប្រពៃណី និងទម្លាប់ក្នុងស្រុក។",
   "pr2_h":"AI ដែលមានខ្សែក្រវាត់សុវត្ថិភាព",
@@ -729,14 +740,17 @@ const STR={
   "s_coming":"មានទំនិញថ្មីៗរាល់សប្តាហ៍។ កញ្ចប់នេះគឺជាដំណាក់កាលដំបូង។",
   "s_cta":"រកមើលផ្ទាំងទំនិញ",
   "grp_lead2":"ទំនិញ ១១ មុខ និងហាងមួយ ក្រុមការងារតែមួយ។ យើងចាប់ផ្តើមពីបញ្ហាដែលយើងអាចមើលឃើញពីតុការងាររបស់យើងខ្លួន — ការអញ្ជើញដែលផ្ញើតាមមេសេន្សែរ ឯកសារ CV ដែលបាត់បង់ក្នុងប្រអប់អ៊ីមែល ឬកន្លែងដែលគ្មានផ្លាកទីតាំងលើផែនទី — ហើយយើងបញ្ចេញវា ដំណើរការវា ហើយរក្សាវាឱ្យរហ័ស។",
-  "p6_e":"ទំនិញឌីជីថល ទទួលបានភ្លាមៗ",
-  "p6_b":"គំរូ និងស្លាយដែលយើងប្រើក្នុងការងាររបស់យើងខ្លួន — ដូចជា PPT Budget Proposal: តារាងថវិកាត្រីមាស និងខែ ការប្រៀបធៀបថវិកាទៅនឹងការចំណាយជាក់ស្តែង និងតារាងហិរញ្ញវត្ថុ Sankey។ បង់ប្រាក់តាមរយៈ ABA KHQR តាមរយៈ CutLuy ហើយទាញយកភ្លាមៗ។ មិនចាំបាច់បង្កើតគណនី មិនចាំបាច់រង់ចាំ។",
-  "p6_t1":"បង់ម្តង កាន់កាប់ជារៀងរហូត",
+  "p6_e":"ទំនិញឌីជីថល ដឹកជញ្ជូនភ្លាមៗ",
+  "p6_b":"គំរូ និងស្លាយដែលយើងប្រើក្នុងការងារផ្ទាល់ — ដូចជា PPT គម្រោងថវិកា៖ តារាងថវិកាត្រីមាស និងខែ ការប្រៀបធៀបថវិកា និងការចំណាយជាក់ស្តែង ក្រាហ្វិកហិរញ្ញវត្ថុ Sankey។ បង់ប្រាក់តាម ABA KHQR តាមរយៈ CutLuy ការទាញយកកើតឡើងភ្លាមៗ។ មិនចាំបាច់បង្កើតគណនី មិនចាំបាច់រង់ចាំ។",
+  "p6_t1":"បង់ប្រាក់ម្តង មានជាអ្វីសារពេលអស់",
   "p6_t2":"KHQR / ABA / Bakong",
   "p6_t3":"ដឹកជញ្ជូនភ្លាមៗ",
-  "p6_t4":"ផលិតផលថ្មីរៀងរាល់សប្តាហ៍",
+  "p6_t4":"ផលិតផលថ្មីៗរាល់សប្តាហ៍",
   "p6_cta":"បើកហាង",
   "soon":"កំពុងមកដល់",
+  "r_know":"ឧបករណ៍ជំនួយទំនើបសម្រាប់កម្ពុជា — ក្រាហ្វិកគណនាពន្ធ ការប្រៀបធៀបកម្ចី មណ្ឌលណែនាំរដ្ឋាភិបាល និងសំណួរ-ចម្លើយសហគមន៍។",
+  "r_store":"គំរូឌីជីថល និងស្លាយពីការងាររបស់យើងផ្ទាល់ — បង់ប្រាក់តាម ABA KHQR ទាញយកភ្លាមៗ មិនចាំបាច់បង្កើតគណនី។",
+  "nav_store":"ហាង",
  }
 };
 const EN_CACHE={};
@@ -774,7 +788,7 @@ const nav=document.getElementById('nav');
 addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
 
 /* ---------- ticker ---------- */
-const items=[['khinvite','#d9b36a'],['TVERCV','#3b6fe0'],['UrDrama','#e0343c'],['KHFinder','#189a6c'],['Sastra Biz','#6e49e8'],['Sastra Store','#10b981'],['KHChess','#f2c14e'],['Card Design','#14b8a6'],['Sastra Quiz','#38bdf8'],['God\'s Eye View','#60a5fa'],['UrPlant','#65a30d']];
+const items=[['Sastra Store','#10b981'],['khinvite','#d9b36a'],['TVERCV','#3b6fe0'],['UrDrama','#e0343c'],['KHFinder','#189a6c'],['Sastra Biz','#6e49e8'],['KHChess','#f2c14e'],['Card Design','#14b8a6'],['Sastra Quiz','#38bdf8'],['God\'s Eye View','#60a5fa'],['UrPlant','#65a30d'],['KH-HELPER','#e879a0']];
 const html=items.map(([n,c])=>`<span style="--dot:${c}"><em>◆</em><b>${n}</b></span>`).join('');
 document.getElementById('ticker').innerHTML=html+html;
 
