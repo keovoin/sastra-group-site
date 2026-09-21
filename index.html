@@ -321,6 +321,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
 }
 @media(max-width:600px){.cta{width:100%;justify-content:center;padding:17px 20px}.hero-meta{gap:18px 26px}.hero h1{font-size:clamp(34px,9.6vw,44px)}}
 </style>
+<link rel="stylesheet" href="assets/modern-redesign.css">
 </head>
 <body>
 
@@ -357,10 +358,22 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
     <span class="line"><i data-i18n="h1c">heart.</i></span>
   </h1>
   <p class="hero-sub" data-i18n="hsub">We build and operate digital products — from Khmer event invitations to enterprise management — designed here, used everywhere.</p>
+  <div class="hero-actions">
+    <a class="btn-hero" href="store.html"><span data-i18n="hero_store">Shop digital products</span></a>
+    <a class="btn-ghost" href="#store"><span data-i18n="hero_products">Explore the group</span></a>
+  </div>
   <div class="hero-meta">
     <div class="cell"><div class="n" data-count="13">0</div><div class="l" data-i18n="m1">Products</div></div>
     <div class="cell"><div class="n" data-count="2">0</div><div class="l" data-i18n="m2">Languages (EN / ខ្មែរ)</div></div>
     <div class="cell"><div class="n" style="font-size:clamp(20px,2.4vw,32px)">KH ⇄ World</div><div class="l" data-i18n="m3">Built in Cambodia</div></div>
+  </div>
+  <div class="hero-visual" aria-hidden="true">
+    <div class="hero-visual-grid">
+      <div class="visual-card main"><img src="assets/khinvite.webp" alt="" loading="eager"><span class="visual-chip">khinvite</span></div>
+      <div class="visual-card"><img src="assets/th-ppt-cover.webp" alt="" loading="eager"><span class="visual-chip">Sastra Store</span></div>
+      <div class="visual-card"><img src="assets/khfinder.webp" alt="" loading="eager"><span class="visual-chip">KHFinder</span></div>
+    </div>
+    <div class="visual-orb"><span data-i18n="hero_orb">13 products<br>one studio</span></div>
   </div>
   <div class="scroll-cue" aria-hidden="true"></div>
 </header>
@@ -756,6 +769,9 @@ const STR={
   "r_know":"ឧបករណ៍ជំនួយទំនើបសម្រាប់កម្ពុជា — ក្រាហ្វិកគណនាពន្ធ ការប្រៀបធៀបកម្ចី មណ្ឌលណែនាំរដ្ឋាភិបាល និងសំណួរ-ចម្លើយសហគមន៍។",
   "r_store":"គំរូឌីជីថល និងស្លាយពីការងាររបស់យើងផ្ទាល់ — បង់ប្រាក់តាម ABA KHQR ទាញយកភ្លាមៗ មិនចាំបាច់បង្កើតគណនី។",
   "nav_store":"ហាង",
+  "hero_store":"ទិញផលិតផលឌីជីថល",
+  "hero_products":"មើលក្រុមផលិតផល",
+  "hero_orb":"ផលិតផល ១៣<br>ក្រុមការងារតែមួយ",
  }
 };
 const EN_CACHE={};
