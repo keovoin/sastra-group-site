@@ -114,8 +114,9 @@ footer{margin-top:auto;padding:20px clamp(18px,4vw,48px);color:var(--faint);font
 .ok-ring{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 16%,transparent);border:1px solid var(--accent);color:var(--accent)}
 @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important}}
 </style>
+<link rel="stylesheet" href="assets/modern-redesign.css">
 </head>
-<body>
+<body class="store-page">
 
 <div class="top">
   <a class="brand" href="./">
@@ -140,13 +141,19 @@ footer{margin-top:auto;padding:20px clamp(18px,4vw,48px);color:var(--faint);font
   <p data-i18n="s_sub">Pay with ABA KHQR via CutLuy — your download appears the second payment lands. No account, no waiting.</p>
 </div>
 
+<div class="store-trust" aria-label="Store benefits">
+  <div class="trust-item"><span class="trust-icon" aria-hidden="true">↯</span><span data-i18n="s_trust1">Instant download after confirmed payment</span></div>
+  <div class="trust-item"><span class="trust-icon" aria-hidden="true">៛</span><span data-i18n="s_trust2">ABA KHQR and Bakong-ready checkout</span></div>
+  <div class="trust-item"><span class="trust-icon" aria-hidden="true">✓</span><span data-i18n="s_trust3">No account needed — your email is the key</span></div>
+</div>
+
 <div class="grid" id="grid">
   <div class="empty" id="loading" data-i18n="s_load">Loading products…</div>
 </div>
 
 <!-- checkout modal -->
 <div class="ov" id="ov">
-  <div class="modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="m-title">
     <button class="m-close" id="m-close" aria-label="Close">
       <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M1.5 1.5l11 11m0-11l-11 11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
     </button>
@@ -158,6 +165,7 @@ footer{margin-top:auto;padding:20px clamp(18px,4vw,48px);color:var(--faint);font
     </div>
     <div class="m-pay">
       <div id="p1">
+        <div class="checkout-step" data-i18n="s_step1">Step 1 of 3 — your email</div>
         <div class="flabel" data-i18n="s_emaill">Email address</div>
         <input class="finput" id="email" type="email" autocomplete="email" placeholder="you@example.com">
         <div class="fhint" data-i18n="s_email_note">We send nothing — your email is the receipt and download key for this order.</div>
@@ -166,6 +174,7 @@ footer{margin-top:auto;padding:20px clamp(18px,4vw,48px);color:var(--faint);font
           <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
       </div>
       <div id="p2" class="qrbox" style="display:none">
+        <div class="checkout-step" data-i18n="s_step2">Step 2 of 3 — scan to pay</div>
         <div class="flabel" data-i18n="s_step2t">Scan to pay</div>
         <div class="pr" id="qr-amt" style="font-size:22px"></div>
         <img class="qr" id="qr-img" width="220" height="220" style="background:#fff;border-radius:12px;padding:10px;border:1px solid var(--line)" alt="KHQR payment code">
@@ -176,6 +185,7 @@ footer{margin-top:auto;padding:20px clamp(18px,4vw,48px);color:var(--faint);font
         <button class="btn alt" id="st2-cancel" style="margin-top:4px"><span data-i18n="s_cancel">Change email / cancel</span></button>
       </div>
       <div id="p3" class="qrbox" style="display:none">
+        <div class="checkout-step" data-i18n="s_step3">Step 3 of 3 — download</div>
         <div class="ok-ring"><svg width="25" height="25" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="flabel" data-i18n="s_paid_ok">Payment confirmed</div>
         <a class="btn" id="dl-btn" href="#" download><span data-i18n="s_dl">Download your file</span></a>
@@ -208,9 +218,9 @@ const EN={};document.querySelectorAll('[data-i18n]').forEach(el=>EN[el.dataset.i
 const KM={
  "s_brand":"សាស្ត្រា","s_store":"ហាង","s_kick":"ទំនិញឌីជីថល — ទាញយកភ្លាមៗ",
  "s_h":"គំរូ និងស្លាយ ដែលយើងប្រើក្នុងការងារពិតរបស់យើង។",
- "s_sub":"បង់ប្រាក់តាម ABA KHQR ដោយ CutLuy — ការទាញយកបានឡើងភ្លាមៗពេលការបង់ប្រាក់ជោគជ័យ។ មិនមាន់ គ្មាន ការរង់ចាំ។",
+ "s_sub":"បង់ប្រាក់តាម ABA KHQR ដោយ CutLuy — ទាញយកបានភ្លាមៗ នៅពេលការបង់ប្រាក់ជោគជ័យ។ មិនចាំបាច់មានគណនី ឬរង់ចាំទេ។",
  "s_load":"កំពុងផ្ទុកផលិតផល…","s_emaill":"អ៊ីមែល",
- "s_email_note":"យើងមិនផ្ញើអ្វីទេ — អ៊ីមែលរបស់អ្នកជាបង្កាន់ដៃ និងសំណូញាញយកសម្រាប់ការកម្មនេះ។",
+ "s_email_note":"យើងមិនផ្ញើអ៊ីមែលផ្សេងទេ — អ៊ីមែលរបស់អ្នកជាបង្កាន់ដៃ និងកូដសម្រាប់ទាញយកការបញ្ជាទិញនេះ។",
  "s_buy":"ទិញឥឡូវ — បង្កើត KHQR","s_step2t":"ស្កេនដើម្បីបង់",
  "s_wait":"កំពុងរង់ចាំការបង់ប្រាក់…","s_or":"បើកទំព័របង់ប្រាក់សុវត្ថិភាពជំនួស",
  "s_scan":"ស្កេនដោយ ABA Pay ឬកម្មវិធី Bakong ណាមួយ","s_cancel":"ប្តូរអ៊ីមែល / បោះបង់",
@@ -220,9 +230,17 @@ const KM={
  "s_foot1":"ហាងសាស្ត្រា — ដោយ សាស្ត្រា នវានុវត្តន៍ឌីជីថល ភ្នំពេញ",
  "s_back":"← គេហទំព័រក្រុម","s_admin":"អ្នកគ្រប់គ្រង",
  "s_buybtn":"ទិញ","s_soldout":"មិនទាន់មាន","s_usd":"USD",
+  "s_trust1":"ទាញយកភ្លាមៗ បន្ទាប់ពីការបង់ប្រាក់ត្រូវបានបញ្ជាក់",
+  "s_trust2":"ការទូទាត់ ABA KHQR និង Bakong ដែលងាយស្រួល",
+  "s_trust3":"មិនចាំបាច់បង្កើតគណនី — អ៊ីមែលគឺជាកូដរបស់អ្នក",
+  "s_step1":"ជំហានទី ១ នៃ ៣ — អ៊ីមែលរបស់អ្នក",
+  "s_step2":"ជំហានទី ២ នៃ ៣ — ស្កេនដើម្បីបង់",
+  "s_step3":"ជំហានទី ៣ នៃ ៣ — ទាញយក",
+  "s_loadfail":"មិនអាចផ្ទុកផលិតផលបានទេ។ សូមព្យាយាមម្តងទៀត។",
 };
 function T(){const k=document.documentElement.lang;setLang2(k);}
 function setLang2(k){
+  document.documentElement.lang=k;
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const key=el.dataset.i18n;
     if(k==='km'&&KM[key])el.innerHTML=KM[key];else if(k==='en'&&EN[key])el.innerHTML=EN[key];
@@ -241,26 +259,31 @@ document.getElementById('b-en').onclick=()=>{localStorage.setItem('sg-lang','en'
 document.getElementById('b-km').onclick=()=>{localStorage.setItem('sg-lang','km');setLang2('km');};
 document.getElementById('b-theme').onclick=()=>setTheme(document.documentElement.classList.contains('light')?'dark':'light');
 
-let PRODUCTS=[];
+let PRODUCTS=[],LOAD_FAILED=false;
 async function loadProducts(){
   try{
     const r=await fetch(SUPA_URL+"/rest/v1/store_products?active=eq.true&select=*&order=sort.asc&order=created_at.desc",{headers:{apikey:ANON_KEY,Authorization:window.__B__+ANON_KEY}});
-    if(r.ok)PRODUCTS=await r.json();
-  }catch(e){}
+    if(r.ok){PRODUCTS=await r.json();LOAD_FAILED=false;}
+    else LOAD_FAILED=true;
+  }catch(e){LOAD_FAILED=true;}
   renderGrid();
 }
 function renderGrid(){
+  const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const g=document.getElementById('grid');
   const km=document.documentElement.lang==='km';
   document.getElementById('loading')&&document.getElementById('loading').remove();
-  if(!PRODUCTS.length){g.innerHTML='<div class="empty">'+(km?KM.s_soldout:'Store opening soon — new drops are on the way.')+'</div>';return;}
-  g.innerHTML=PRODUCTS.map(p=>{
+  if(!PRODUCTS.length){
+    const msg=LOAD_FAILED?(km?KM.s_loadfail:'Couldn’t load products. Check your connection and refresh.'):(km?KM.s_soldout:'Store opening soon — new drops are on the way.');
+    g.innerHTML='<div class="empty">'+msg+'</div>';return;
+  }
+  g.innerHTML=PRODUCTS.map((p,i)=>{
     const desc=(km&&p.description_km)?p.description_km:(p.description||'');
-    return `<div class="card">
-      <div class="thumb"><img src="${p.cover_url||''}" alt="${p.title.replace(/"/g,'')}" loading="lazy" onerror="this.parentElement.style.background='var(--surface-2)';this.remove()"></div>
-      <div class="b"><h3>${p.title}</h3><div class="d">${desc}</div>
+    return `<div class="card" style="animation-delay:${Math.min(i*80,400)}ms">
+      <div class="thumb"><img src="${esc(p.cover_url||'')}" alt="${esc(p.title)}" loading="lazy" onerror="this.parentElement.style.background='var(--surface-2)';this.remove()"></div>
+      <div class="b"><div class="card-kicker">${km?'ការទាញយកភ្លាមៗ':'Instant download'}</div><h3>${esc(p.title)}</h3><div class="d">${esc(desc)}</div>
         <div class="row"><span class="pr">$${Number(p.price_usd).toFixed(2)}<small>USD</small></span>
-        <button class="buy" data-slug="${p.slug}">${km?KM.s_buybtn:'Buy'}</button></div>
+        <button class="buy" data-slug="${esc(p.slug)}">${km?KM.s_buybtn:'Buy'}</button></div>
       </div></div>`;
   }).join('');
   // structured data for search engines (Product schema per live item)
@@ -278,10 +301,11 @@ function renderGrid(){
   g.querySelectorAll('.buy').forEach(btn=>btn.onclick=()=>openCheckout(btn.dataset.slug));
 }
 /* ---------- checkout ---------- */
-const ov=document.getElementById('ov');let timer=null;
+const ov=document.getElementById('ov');let timer=null,lastFocus=null;
 function steps(n){['p1','p2','p3','p4'].forEach((id,i)=>{document.getElementById(id).style.display=i===n?'flex':'none';document.getElementById(id).style.alignItems=i===n&&!['p1'].includes(id)?'center':'stretch';document.getElementById(id).style.textAlign=i===n&&!['p1'].includes(id)?'center':'left';});}
 function openCheckout(slug){
   const p=PRODUCTS.find(x=>x.slug===slug);if(!p)return;
+  lastFocus=document.activeElement;
   document.getElementById('m-cov').src=p.cover_url||'';
   document.getElementById('m-cov').alt=p.title;
   document.getElementById('m-title').textContent=p.title;
@@ -289,14 +313,20 @@ function openCheckout(slug){
   document.getElementById('m-price').textContent='$'+Number(p.price_usd).toFixed(2);
   document.getElementById('e1').textContent='';document.getElementById('e2').textContent='';
   steps(0);ov.classList.add('open');document.body.style.overflow='hidden';
+  setTimeout(()=>document.getElementById('email').focus(),80);
 }
-function closeModal(){clearInterval(timer);ov.classList.remove('open');document.body.style.overflow='';}
+function closeModal(){
+  clearInterval(timer);ov.classList.remove('open');document.body.style.overflow='';
+  if(lastFocus&&document.contains(lastFocus))lastFocus.focus();
+}
 document.getElementById('m-close').onclick=closeModal;
 ov.addEventListener('click',e=>{if(e.target===ov)closeModal();});
 addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 async function fn(body){
-  const r=await fetch(FN,{method:'POST',headers:{'Content-Type':'application/json','apikey':ANON_KEY,Authorization:window.__B__+ANON_KEY},body:JSON.stringify(body)});
-  return {s:r.status,j:await r.json().catch(()=>({}))};
+  try{
+    const r=await fetch(FN,{method:'POST',headers:{'Content-Type':'application/json','apikey':ANON_KEY,Authorization:window.__B__+ANON_KEY},body:JSON.stringify(body)});
+    return {s:r.status,j:await r.json().catch(()=>({}))};
+  }catch(e){return {s:0,j:{}};}
 }
 function poll(orderId,email){
   clearInterval(timer);
@@ -304,6 +334,7 @@ function poll(orderId,email){
     const {s,j}=await fn({action:'status',order_id:orderId,email});
     if(j.status==='paid'){clearInterval(timer);document.getElementById('dl-btn').href=j.download_url||'#';steps(2);}
     else if(j.status==='expired'){clearInterval(timer);steps(3);}
+    else if(s===0){clearInterval(timer);document.getElementById('e2').textContent=document.documentElement.lang==='km'?'បាត់បង់ការតភ្ជាប់អ៊ីនធឺណិត':'Connection lost — please check your network.';}
     else if(s>=400){clearInterval(timer);document.getElementById('e2').textContent=j.error||'Payment error';}
   },4000);
 }
@@ -316,14 +347,14 @@ document.getElementById('go').onclick=async()=>{
   const btn=document.getElementById('go');btn.disabled=true;
   const {s,j}=await fn({action:'create',product_slug:curSlug,email});
   btn.disabled=false;
-  if(s!==200||!j.order_id){e1.textContent=j.error||'Could not create payment';return;}
+  if(s!==200||!j.order_id){e1.textContent=j.error||(s===0?'Connection failed — please try again.':'Could not create payment');return;}
   document.getElementById('qr-img').src=j.qr_image||'';
   document.getElementById('qr-amt').textContent='$'+Number(j.amount).toFixed(2);
   document.getElementById('qr-link').href=j.checkout_url||'#';
   steps(1);poll(j.order_id,email);
 };
 document.getElementById('st2-cancel').onclick=()=>{clearInterval(timer);steps(0);};
-document.getElementById('retry').onclick=()=>{document.getElementById('go').click();steps(1);};
+document.getElementById('retry').onclick=()=>document.getElementById('go').click();
 
 let curSlug=null;
 const _open=openCheckout;
