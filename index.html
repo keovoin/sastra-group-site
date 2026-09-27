@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sastra Digital Innovation — Technology with a Khmer heart</title>
-<meta name="description" content="Sastra Digital Innovation builds 12 digital products for Cambodia: khinvite digital invitations, tvercv CV/ATS, UrDrama streaming, KHFinder map, Sastra Biz platform, Sastra Store and more. EN + Khmer, KHQR payments.">
+<meta name="description" content="Sastra Digital Innovation builds 14 digital products for Cambodia: khinvite digital invitations, tvercv CV/ATS, UrDrama streaming, KHFinder map, Sastra Biz platform, Sastra Store and more. EN + Khmer, KHQR payments.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://sastra-group.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sastra Digital Innovation">
 <meta property="og:title" content="Sastra Digital Innovation — Technology with a Khmer heart">
-<meta property="og:description" content="12 digital products for Cambodia: invitations, careers, streaming, maps, enterprise and a digital store. Built in Phnom Penh.">
+<meta property="og:description" content="14 digital products for Cambodia: invitations, careers, streaming, maps, enterprise and a digital store. Built in Phnom Penh.">
 <meta property="og:url" content="https://sastra-group.vercel.app/">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="km_KH">
@@ -29,7 +29,8 @@
 "address":{"@type":"PostalAddress","addressLocality":"Phnom Penh","addressCountry":"KH"},
 "sameAs":["https://github.com/keovoin"],
 "hasOfferCatalog":{"@type":"OfferCatalog","name":"Products","itemListElement":[
- {"@type":"OfferCatalog","name":"Sastra Store","url":"https://sastra-group.vercel.app/store.html"}
+ {"@type":"OfferCatalog","name":"Sastra Store","url":"https://sastra-group.vercel.app/store.html"},
+ {"@type":"OfferCatalog","name":"Sastra Fitmeal","url":"https://fitmeal.sastrakh.com"}
 ]}}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -265,6 +266,7 @@ html[lang="km"] h2.big{line-height:1.4}
   position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;
   background:var(--surface);transition:transform .5s var(--ease),border-color .5s,box-shadow .5s var(--ease);
 }
+.more-card.is-soon:hover{transform:none;box-shadow:none;border-color:var(--line)}
 .more-card:hover{transform:translateY(-8px);border-color:color-mix(in srgb,var(--more-c) 55%,var(--line));box-shadow:0 30px 70px -30px rgba(0,0,0,.6)}
 .more-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--surface-2)}
 .more-thumb img{width:100%;height:100%;object-fit:cover;object-position:top center;transform:scale(1.02);transition:transform 1.2s var(--ease),filter .6s;filter:saturate(.9)}
@@ -286,6 +288,7 @@ html[lang="km"] h2.big{line-height:1.4}
 .more-foot .num{font-family:var(--font-display);font-size:12px;color:var(--faint)}
 .more-foot .go{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted);transition:all .35s var(--ease)}
 .more-card:hover .more-foot .go{border-color:var(--more-c);color:var(--more-c);transform:rotate(-45deg)}
+.more-card.is-soon .go{display:none}
 
 /* ------- about ------- */
 .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(36px,6vw,90px)}
@@ -334,6 +337,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
     <a href="#urdrama">UrDrama</a>
     <a href="#khfinder">KHFinder</a>
     <a href="#biz">Sastra Biz</a>
+    <a href="#fitmeal">Fitmeal</a>
     <a href="#more" data-i18n="nav_more">More</a>
     </div>
   <div class="nav-tools">
@@ -363,7 +367,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
     <a class="btn-ghost" href="#store"><span data-i18n="hero_products">Explore the group</span></a>
   </div>
   <div class="hero-meta">
-    <div class="cell"><div class="n" data-count="13">0</div><div class="l" data-i18n="m1">Products</div></div>
+    <div class="cell"><div class="n" data-count="14">0</div><div class="l" data-i18n="m1">Products</div></div>
     <div class="cell"><div class="n" data-count="2">0</div><div class="l" data-i18n="m2">Languages (EN / ខ្មែរ)</div></div>
     <div class="cell"><div class="n" style="font-size:clamp(20px,2.4vw,32px)">KH ⇄ World</div><div class="l" data-i18n="m3">Built in Cambodia</div></div>
   </div>
@@ -373,7 +377,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
       <div class="visual-card"><img src="assets/th-ppt-cover.webp" alt="" loading="eager"><span class="visual-chip">Sastra Store</span></div>
       <div class="visual-card"><img src="assets/khfinder.webp" alt="" loading="eager"><span class="visual-chip">KHFinder</span></div>
     </div>
-    <div class="visual-orb"><span data-i18n="hero_orb">13 products<br>one studio</span></div>
+    <div class="visual-orb"><span data-i18n="hero_orb">14 products<br>one studio</span></div>
   </div>
   <div class="scroll-cue" aria-hidden="true"></div>
 </header>
@@ -538,74 +542,100 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
 
 <div class="rule"></div>
 
+<div class="rule"></div>
+
+<!-- fitmeal -->
+<section class="section prod" id="fitmeal" style="--prod:#ff6b35">
+  <div class="split flip">
+    <div class="copy">
+      <div class="eyebrow rv"><span class="idx">07</span> <span data-i18n="p7_e">Eat well, the Khmer way</span></div>
+      <h2 class="big rv rv-d1">Sastra Fitmeal</h2>
+      <p class="prose rv rv-d2" data-i18n="p7_b">Our meal service and recipe app for Cambodia — <strong>buy a ready-to-eat set menu or cook it yourself</strong>: nine Khmer set menus with Cambodia-friendly measurements, step-by-step cook mode with a live timer, rotating promo banners, and a Flutter mini-app inside Telegram. EN + ខ្មែរ, ៛ pricing.</p>
+      <div class="tags rv rv-d2">
+        <span class="tag" data-i18n="p7_t1">9 set menus</span><span class="tag" data-i18n="p7_t2">Cook-along mode</span>
+        <span class="tag" data-i18n="p7_t3">Telegram mini-app</span><span class="tag" data-i18n="p7_t4">EN + ខ្មែរ</span>
+      </div>
+      <a class="cta rv" href="https://fitmeal.sastrakh.com" target="_blank" rel="noopener"><span data-i18n="visit7">Visit</span> Fitmeal
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></a>
+    </div>
+    <div class="shot rv rv-d1">
+      <div class="shot-window">
+        <div class="shot-bar"><i></i><i></i><i></i><span class="addr">fitmeal.sastrakh.com</span></div>
+        <img src="assets/fitmeal.webp" alt="Sastra Fitmeal app" loading="lazy">
+      </div>
+      <div class="logo-badge" style="font-size:30px">🍚</div>
+    </div>
+  </div>
+</section>
+
 <!-- more products -->
 <section class="section" id="more">
   <div class="eyebrow rv" style="--prod:var(--gold)"><span class="idx">—</span> <span data-i18n="more_e">Also shipping from the group</span></div>
   <h2 class="big rv rv-d1" data-i18n="more_h">And the rest of the family.</h2>
   <div class="more-list rv rv-d2">
-    <a class="more-card" style="--more-c:#f2c14e" href="https://kh-chess-app.vercel.app" target="_blank" rel="noopener">
-      <div class="more-thumb"><img src="assets/th-chess.webp" alt="KHChess" loading="lazy"></div>
+    <div class="more-card is-soon" style="--more-c:#f2c14e;cursor:default">
+      <div class="more-thumb"><img src="assets/th-chess.webp" alt="KHChess" loading="lazy"><div class="more-soon"><span data-i18n="soon">Coming Soon</span></div></div>
       <div class="more-body">
         <span class="name">KHChess</span>
         <span class="desc" data-i18n="r_chess">Play chess against a live engine or friends — leaderboards, instant matches, bilingual board UI.</span>
-        <div class="more-foot"><span class="num">07</span>
-          <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
-      </div>
-    </a>
-    <a class="more-card" style="--more-c:#14b8a6" href="https://sastra-card-design.vercel.app" target="_blank" rel="noopener">
-      <div class="more-thumb"><img src="assets/th-card.webp" alt="Sastra Card Design" loading="lazy"></div>
-      <div class="more-body">
-        <span class="name">Sastra Card Design</span>
-        <span class="desc" data-i18n="r_card">Design Khmer greeting cards — birthdays, holidays, thank-you cards — in seconds, in the browser.</span>
         <div class="more-foot"><span class="num">08</span>
           <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
       </div>
-    </a>
-    <a class="more-card" style="--more-c:#38bdf8" href="https://elitequiz.onrender.com" target="_blank" rel="noopener">
-      <div class="more-thumb"><img src="assets/th-quizq.webp" alt="Sastra Quiz" loading="lazy"></div>
+    </div>
+    <div class="more-card is-soon" style="--more-c:#14b8a6;cursor:default">
+      <div class="more-thumb"><img src="assets/th-card.webp" alt="Sastra Card Design" loading="lazy"><div class="more-soon"><span data-i18n="soon">Coming Soon</span></div></div>
       <div class="more-body">
-        <span class="name">Sastra Quiz</span>
-        <span class="desc" data-i18n="r_quiz">Mobile quiz competition with an admin panel for questions, categories and prize rounds.</span>
+        <span class="name">Sastra Card Design</span>
+        <span class="desc" data-i18n="r_card">Design Khmer greeting cards — birthdays, holidays, thank-you cards — in seconds, in the browser.</span>
         <div class="more-foot"><span class="num">09</span>
           <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
       </div>
-    </a>
-    <a class="more-card" style="--more-c:#60a5fa" href="https://godeye-60ce.onrender.com" target="_blank" rel="noopener">
-      <div class="more-thumb"><img src="assets/th-god.webp" alt="God's Eye View" loading="lazy"></div>
+    </div>
+    <div class="more-card is-soon" style="--more-c:#38bdf8;cursor:default">
+      <div class="more-thumb"><img src="assets/th-quizq.webp" alt="Sastra Quiz" loading="lazy"><div class="more-soon"><span data-i18n="soon">Coming Soon</span></div></div>
       <div class="more-body">
-        <span class="name">God's Eye View</span>
-        <span class="desc" data-i18n="r_god">A live 3D globe tracking planes, satellites and ships in real time.</span>
+        <span class="name">Sastra Quiz</span>
+        <span class="desc" data-i18n="r_quiz">Mobile quiz competition with an admin panel for questions, categories and prize rounds.</span>
         <div class="more-foot"><span class="num">10</span>
           <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
       </div>
-    </a>
-    <a class="more-card" style="--more-c:#65a30d" href="https://urplant-app.web.app" target="_blank" rel="noopener">
-      <div class="more-thumb"><img src="assets/th-plant.webp" alt="UrPlant" loading="lazy"></div>
+    </div>
+    <div class="more-card is-soon" style="--more-c:#60a5fa;cursor:default">
+      <div class="more-thumb"><img src="assets/th-god.webp" alt="God's Eye View" loading="lazy"><div class="more-soon"><span data-i18n="soon">Coming Soon</span></div></div>
       <div class="more-body">
-        <span class="name">UrPlant</span>
-        <span class="desc" data-i18n="r_plant">Plant-care companion app — watering reminders, plant library and growth journal on Android.</span>
+        <span class="name">God's Eye View</span>
+        <span class="desc" data-i18n="r_god">A live 3D globe tracking planes, satellites and ships in real time.</span>
         <div class="more-foot"><span class="num">11</span>
           <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
       </div>
-    </a>
-        <a class="more-card" style="--more-c:#e879a0" href="https://knowitall-kh.com" target="_blank" rel="noopener">
-      <div class="more-thumb"><img src="assets/th-know.webp" alt="Sastra KH-HELPER" loading="lazy"></div>
+    </div>
+    <div class="more-card is-soon" style="--more-c:#65a30d;cursor:default">
+      <div class="more-thumb"><img src="assets/th-plant.webp" alt="UrPlant" loading="lazy"><div class="more-soon"><span data-i18n="soon">Coming Soon</span></div></div>
       <div class="more-body">
-        <span class="name">Sastra KH-HELPER</span>
-        <span class="desc" data-i18n="r_know">All-in-one Cambodia helper — tax calculators, loan comparison, government guides and community Q&amp;A.</span>
+        <span class="name">UrPlant</span>
+        <span class="desc" data-i18n="r_plant">Plant-care companion app — watering reminders, plant library and growth journal on Android.</span>
         <div class="more-foot"><span class="num">12</span>
           <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
       </div>
-    </a>
-    <a class="more-card" style="--more-c:#f97316" href="https://keovoin.github.io/Sastra-HowToLiveBetter/" target="_blank" rel="noopener">
-      <div class="more-thumb"><img src="assets/th-book.webp" alt="How To Live Better" loading="lazy"></div>
+    </div>
+        <div class="more-card is-soon" style="--more-c:#e879a0;cursor:default">
+      <div class="more-thumb"><img src="assets/th-know.webp" alt="Sastra KH-HELPER" loading="lazy"><div class="more-soon"><span data-i18n="soon">Coming Soon</span></div></div>
       <div class="more-body">
-        <span class="name">How To Live Better</span>
-        <span class="desc" data-i18n="r_book">An open knowledge book on trading money and time for health and freedom — 中文 / EN / ខ្មែរ.</span>
+        <span class="name">Sastra KH-HELPER</span>
+        <span class="desc" data-i18n="r_know">All-in-one Cambodia helper — tax calculators, loan comparison, government guides and community Q&amp;A.</span>
         <div class="more-foot"><span class="num">13</span>
           <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
       </div>
-    </a>
+    </div>
+    <div class="more-card is-soon" style="--more-c:#f97316;cursor:default">
+      <div class="more-thumb"><img src="assets/th-book.webp" alt="How To Live Better" loading="lazy"><div class="more-soon"><span data-i18n="soon">Coming Soon</span></div></div>
+      <div class="more-body">
+        <span class="name">How To Live Better</span>
+        <span class="desc" data-i18n="r_book">An open knowledge book on trading money and time for health and freedom — 中文 / EN / ខ្មែរ.</span>
+        <div class="more-foot"><span class="num">14</span>
+          <span class="go"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -614,7 +644,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
   <div class="eyebrow rv"><span class="idx">—</span> <span data-i18n="grp_e">The group</span></div>
   <div class="about-grid">
     <div>
-      <p class="about-lead rv" data-i18n="grp_lead">Thirteen products, one team. We start with a problem we can see from our own desk — an invitation sent by messenger, a CV lost in an inbox, a place with no pin on the map — and we <em>ship it, run it, and keep it fast.</em></p>
+      <p class="about-lead rv" data-i18n="grp_lead">Fourteen products, one team. We start with a problem we can see from our own desk — an invitation sent by messenger, a CV lost in an inbox, a place with no pin on the map — and we <em>ship it, run it, and keep it fast.</em></p>
     </div>
     <div class="principles rv rv-d1">
       <div class="principle" style="--pcol:#d9b36a">
@@ -645,6 +675,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
         <a href="https://khfinder.com" target="_blank" rel="noopener">KHFinder</a>
         <a href="https://sastra-biz.onrender.com" target="_blank" rel="noopener">Sastra Biz</a>
         <a href="store.html">Sastra Store</a>
+        <a href="https://fitmeal.sastrakh.com" target="_blank" rel="noopener">Sastra Fitmeal</a>
       </div>
       <div class="f-col">
         <h5>&nbsp;</h5>
@@ -664,7 +695,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
   </div>
   <div class="f-bottom">
     <span><span data-i18n="f_copy">© សាស្ត្រា នវានុវត្តន៍ឌីជីថល ភ្នំពេញ កម្ពុជា។</span> <span id="yr"></span></span>
-    <span>khinvite · tvercv · urdrama · khfinder · sastra.biz</span>
+    <span>khinvite · tvercv · urdrama · khfinder · sastra.biz · fitmeal</span>
   </div>
 </footer>
 
@@ -723,7 +754,7 @@ const STR={
   "r_plant":"កម្មវិធីជំនួយការថែរក្សារុក្ខជាតិ — ការរំលឹកដាក់ទឹក បណ្ណាល័យរុក្ខជាតិ និងក្រមកតាមដានការលូតលាស់ លើ Android។",
   "r_book":"សៀវភៅចំណេះដឹងបើកចំហ អំពីការប្តូរលុយ និងពេលវេលា ដើម្បីសុខភាព និងសេរីភាព — ភាសាចិន / អង់គ្លេស / ខ្មែរ។",
   "grp_e":"ក្រុមរបស់យើង",
-  "grp_lead":"ទំនិញ ១៣ មុខ និងហាងមួយ ក្រុមការងារតែមួយ។ យើងចាប់ផ្តើមពីបញ្ហាដែលយើងឃើញពីតុការងាររបស់យើងផ្ទាល់ — ការអញ្ជើញផ្ញើតាមមេសេន្ស័រ CV បាត់បង់ក្នុងប្រអប់សារ ឬទីកន្លែងដែលគ្មានស្លាកលើផែនទី — ហើយយើងបញ្ជូនវា ដំណើរការវា និងរក្សាវាឱ្យរហ័ស។",
+  "grp_lead":"ទំនិញ ១៤ មុខ និងហាងមួយ ក្រុមការងារតែមួយ។ យើងចាប់ផ្តើមពីបញ្ហាដែលយើងឃើញពីតុការងាររបស់យើងផ្ទាល់ — ការអញ្ជើញផ្ញើតាមមេសេន្ស័រ CV បាត់បង់ក្នុងប្រអប់សារ ឬទីកន្លែងដែលគ្មានស្លាកលើផែនទី — ហើយយើងបញ្ជូនវា ដំណើរការវា និងរក្សាវាឱ្យរហ័ស។",
   "pr1_h":"ខ្មែរជាអាទិភាព",
   "pr1_p":"គាំទ្រភាសាខ្មែរពេញលេញ ការបង់ប្រាក់តាម KHQR និងការរចនាដែលគោរពប្រពៃណី និងទម្លាប់ក្នុងស្រុក។",
   "pr2_h":"AI ដែលមានខ្សែក្រវាត់សុវត្ថិភាព",
@@ -765,13 +796,20 @@ const STR={
   "p6_t3":"ដឹកជញ្ជូនភ្លាមៗ",
   "p6_t4":"ផលិតផលថ្មីៗរាល់សប្តាហ៍",
   "p6_cta":"បើកហាង",
+  "p7_e":"ស៊ីល្អ តាមរបៀបខ្មែរ",
+  "p7_b":"កម្មវិធីសេវាកម្មម្ហូប និងរូបមន្តរបស់យើង សម្រាប់ប្រទេសកម្ពុជា — ទិញម៉ឺនុយសំណុំដែលរៀបចំរួច ឬចម្អិនវាដោយខ្លួនឯង។ ម៉ឺនុយខ្មែរចំនួន ៩ មុខ ជាមួយការវាស់វែងដែលសមស្របសម្រាប់កម្ពុជា របៀបចម្អិនម្ហូបជាជំហានៗ ជាមួយម៉ោងជាក់ស្តែង ប្លង់ផ្សព្វផ្សាយប្រែប្រួល និងកម្មវិធីតូចៗនៅក្នុង Telegram។ EN + ខ្មែរ តម្លៃ៛។",
+  "p7_t1":"ម៉ឺនុយសំណុំ ៩ មុខ",
+  "p7_t2":"របៀបចម្អិនជាជំហានៗ",
+  "p7_t3":"កម្មវិធី Telegram តូចៗ",
+  "p7_t4":"EN + ខ្មែរ",
+  "visit7":"ទស្សនា",
   "soon":"កំពុងមកដល់",
   "r_know":"ឧបករណ៍ជំនួយទំនើបសម្រាប់កម្ពុជា — ក្រាហ្វិកគណនាពន្ធ ការប្រៀបធៀបកម្ចី មណ្ឌលណែនាំរដ្ឋាភិបាល និងសំណួរ-ចម្លើយសហគមន៍។",
   "r_store":"គំរូឌីជីថល និងស្លាយពីការងាររបស់យើងផ្ទាល់ — បង់ប្រាក់តាម ABA KHQR ទាញយកភ្លាមៗ មិនចាំបាច់បង្កើតគណនី។",
   "nav_store":"ហាង",
   "hero_store":"ទិញផលិតផលឌីជីថល",
   "hero_products":"មើលក្រុមផលិតផល",
-  "hero_orb":"ផលិតផល ១៣<br>ក្រុមការងារតែមួយ",
+  "hero_orb":"ផលិតផល ១៤<br>ក្រុមការងារតែមួយ",
  }
 };
 const EN_CACHE={};
@@ -809,7 +847,7 @@ const nav=document.getElementById('nav');
 addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
 
 /* ---------- ticker ---------- */
-const items=[['Sastra Store','#10b981'],['khinvite','#d9b36a'],['TVERCV','#3b6fe0'],['UrDrama','#e0343c'],['KHFinder','#189a6c'],['Sastra Biz','#6e49e8'],['KHChess','#f2c14e'],['Card Design','#14b8a6'],['Sastra Quiz','#38bdf8'],['God\'s Eye View','#60a5fa'],['UrPlant','#65a30d'],['KH-HELPER','#e879a0']];
+const items=[['Sastra Store','#10b981'],['khinvite','#d9b36a'],['TVERCV','#3b6fe0'],['UrDrama','#e0343c'],['KHFinder','#189a6c'],['Sastra Biz','#6e49e8'],['KHChess','#f2c14e'],['Card Design','#14b8a6'],['Sastra Quiz','#38bdf8'],['God\'s Eye View','#60a5fa'],['UrPlant','#65a30d'],['KH-HELPER','#e879a0'],['Fitmeal','#ff6b35']];
 const html=items.map(([n,c])=>`<span style="--dot:${c}"><em>◆</em><b>${n}</b></span>`).join('');
 document.getElementById('ticker').innerHTML=html+html;
 
